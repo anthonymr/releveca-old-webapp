@@ -49,11 +49,38 @@ html {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.form-wrapper > p {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.form-wrapper > p > a {
+    text-decoration: none;
+    color: var(--black);
+}
+
 .form-error {
     color: var(--error);
     font-size: 11px;
     bottom: 0;
-    height: 11px;
+    height: fit-content;
     line-height: 11px;
     margin: -7px 0;
+}
+
+.login-description {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.login-description h2 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.login-description p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
 }

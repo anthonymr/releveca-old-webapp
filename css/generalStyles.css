@@ -2,6 +2,7 @@
 
 :root {
     --black: #131313;
+    --gray: #5c5c5c;
     --border: #e8e8e8;
 
     --primary: rgb(235, 74, 74);
@@ -35,7 +36,8 @@ input[type="password"] {
 }
 
 button,
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"] {
     width: 100%;
     line-height: 45px;
     padding: 0 15px;
@@ -46,7 +48,8 @@ input[type="submit"] {
 }
 
 button.secondary,
-input[type="submit"].secondary {
+input[type="submit"].secondary,
+input[type="reset"].secondary {
     background-color: var(--secondary);
     color: var(--black);
 }
