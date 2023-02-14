@@ -74,63 +74,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="../css/cdn/bootstrap.css" rel="stylesheet">
-    <title>Tencelu | Panel de control</title>
-    <link rel="icon" href="../img/icon_new.svg?v=2" />
-    <link rel="stylesheet" href="../css/controlpanel.css" />
-    <style type="text/css">
-        html{width:100%; height:100%;}
-        body{
-            font: 14px sans-serif;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYC Project</title>
 
-        .wrapper{ 
-            width: 350px; 
-            padding: 20px;
-        }
-
-        .panel{
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-        }
-
-        h2{
-            margin-top: 0px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/generalStyles.css">
+    <link rel="stylesheet" href="./css/loginPage.css">
 </head>
-<body  style="background-image:url('img/background.jpg');  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="wrapper">
-                <h2>Restablecer contraseña</h2>
-                <p>Por favor, complete el siguiente formulario para restablecer su contraseña.</p>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
-                    <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
-                        <label>Nueva contraseña</label>
-                        <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
-                        <span class="help-block"><?php echo $new_password_err; ?></span>
-                    </div>
-                    <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                        <label>Confirme su contraseña</label>
-                        <input type="password" name="confirm_password" class="form-control">
-                        <span class="help-block"><?php echo $confirm_password_err; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Continuar">
-                        <a class="btn btn-link" href="welcome.php">Cancelar</a>
-                    </div>
-                </form>
-            </div> 
-        </div>  
-    </div> 
+<body>
+    <main class="login-page">   
+        <div class="login-description">
+            <h2>Restablecer contraseña</h2>
+            <p>Por favor, complete el siguiente formulario para restablecer su contraseña.</p>
+        </div>
+        <form class="form-wrapper" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <input placeholder="Contraseña" type="password" name="new_password" value="<?php echo $new_password; ?>">
+            <input placeholder="Confirmar contraseña" type="password" name="confirm_password">
+            
+
+
+            <input type="submit" value="Continuar">
+            <button class="secondary"><a class="btn btn-link" href="welcome.php">Cancelar</a></button>
+
+            <div class="form-error"> 
+                <?php echo $new_password_err; ?>
+                <?php echo $confirm_password_err; ?>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

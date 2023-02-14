@@ -125,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form class="form-wrapper" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <input placeholder="Usuario" type="text" name="username" value="<?php echo $username; ?>">
             <input placeholder="e-mail" type="text" name="mail" value="<?php echo $mail; ?>">
-            <input placeholder="Contraseña" type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+            <input placeholder="Contraseña" type="password" name="password" value="<?php echo $password; ?>">
             <input placeholder="Confirmar contraseña" type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
             
 
