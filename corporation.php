@@ -7,6 +7,7 @@ require_once "./backend/functions.php";
 if (isset($_GET['corporation'])) {
     $_SESSION["corporation"] = $_GET['corporation'];
     header("location: welcome.php");
+    exit;
 }
 
 $query = 'SELECT * FROM corporations WHERE trusted = 1';

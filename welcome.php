@@ -13,8 +13,6 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     header("location: corporation.php");
     exit;
 }
-
-
 ?>
 
 <!DOCTYPE html>
