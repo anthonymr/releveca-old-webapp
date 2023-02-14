@@ -45,6 +45,18 @@ function genericRequest($link, $query)
     echo json_encode($response);
 }
 
+function genericInlineRequest($link, $query)
+{
+    $data = mysqli_query($link, $query);
+    $response = array();
+
+    while ($row = mysqli_fetch_assoc($data)) {
+        $response[] = $row;
+    }
+    
+    return($response);
+}
+
 function genericUpdate($link, $query)
 {
     if (mysqli_query($link, $query)) {
