@@ -3,8 +3,6 @@ Vue.component('v_main_panel', {
 
     template: `
         <section>
-           {{module.name}}
-           {{submodules}}
         </section>
     `,
 
@@ -15,14 +13,14 @@ Vue.component('v_main_panel', {
     },
 
     created() {
-        this.getSubmodules();
+        //this.getSubmodules();
     },
 
     methods: {
-        getSubmodules() {
-            axios.post(this.$ajax, { request: 'getSubmodules', module: this.module.id })
+        /*getSubmodules() {
+            axios.post(this.$ajax, { request: 'getSubmodules', module: this.module.module.id })
                 .then((response) => { this.submodules = response.data; })
                 .catch((error) => console.error(error));
-        },
+        },*/
     },
 });

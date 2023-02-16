@@ -11,18 +11,17 @@ session_start();
 
 $data = json_decode(file_get_contents("php://input"));
 $request = $data->request;
+$user = $_SESSION["id"];
+$corporation = $_SESSION["corporation"];
 
 switch ($request) {
     case "getModules":
-        $user = $_SESSION["id"];
-        $corporation = $_SESSION["corporation"];
-
         genericRequest($link, "CALL sp_get_modules($user, $corporation)");
         break;
     case "getSubmodules":
-        $user = $_SESSION["id"];
-        $corporation = $_SESSION["corporation"];
-
         genericRequest($link, "CALL sp_get_submodules($user, $corporation, $data->module)");
+        break;
+    case "getAllSubmodules":
+        genericRequest($link, "CALL sp_get_all_submodules($user, $corporation)");
         break;
 }
