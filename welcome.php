@@ -32,7 +32,8 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="js/vendors/axios.js" defer></script>
     <script src="js/vendors/vue.js" defer></script>
 
-    <script src="js/components/MainMenu.js" defer></script>
+    <script src="components/MainMenu/MainMenu.js" defer></script>
+    <link rel="stylesheet" href="components/MainMenu/MainMenu.css">
 
     <script src="js/main.js" defer></script>
 </head>

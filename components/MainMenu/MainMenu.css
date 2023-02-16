@@ -1,0 +1,74 @@
+.main-menu__wrapper {
+    width: 100%;
+    height: 100vh;
+    max-height: 70px;
+    max-width: 70px;
+    background-color: transparent;
+    padding: 15px;
+    transition: max-width 0.5s;
+    border-right: none;
+    box-shadow: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.active-mobile-menu__wrapper {
+    max-width: 70%;
+    max-height: 100vh;
+    border-right: 1px solid var(--border);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
+}
+
+.main-menu__mobile-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.main-menu__mobile-hamburger>div {
+    background-color: var(--gray);
+    width: 25px;
+    height: 4px;
+    border-radius: 1px;
+    transition: background-color 0.2s linear, transform 0.2s linear;
+}
+
+.active-mobile-menu div:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.active-mobile-menu div:nth-child(2) {
+    background-color: transparent;
+}
+
+.active-mobile-menu div:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.main-menu__modules-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: visibility 0s, opacity 0.5s 0.2s linear;
+}
+
+.active-mobile-menu__modules-wrapper {
+    visibility: visible;
+    opacity: 1;
+
+}
+
+.main-menu__modules-wrapper > div {
+    padding: 20px 40px;
+    cursor: pointer;
+    user-select: none;
+}
