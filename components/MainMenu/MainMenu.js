@@ -16,7 +16,7 @@ Vue.component('v_main_menu', {
             <div class="main-menu__modules-wrapper" 
                 :class="activeMobileMenu ? 'active-mobile-menu__modules-wrapper' : ''"            
                 >
-                <div v-for="module in modules" @click="changeModule(module.id)">
+                <div v-for="module in modules" @click="changeModule(module)">
                     <i :class="module.icon"></i>
                     {{module.name}}
                 </div>
@@ -36,14 +36,14 @@ Vue.component('v_main_menu', {
     },
 
     methods: {
-        getModules(){
+        getModules() {
             axios.post(this.$ajax, { request: 'getModules' })
-            .then((response) => {this.modules = response.data;})
-            .catch((error) => console.error(error));
+                .then((response) => { this.modules = response.data; })
+                .catch((error) => console.error(error));
         },
 
-        changeModule(id){
-            this.$emit('change', id);
+        changeModule(module) {
+            this.$emit('change', module);
             this.activeMobileMenu = false;
         }
     },

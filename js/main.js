@@ -4,7 +4,7 @@ const VueInstance = new Vue({
     el: "#app",
 
     data: {
-        currentModule: 1
+        currentModule: { "id": "1", "name": "Inicio", "icon": "" }
     },
 
     methods: {

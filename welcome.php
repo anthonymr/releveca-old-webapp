@@ -36,13 +36,16 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/MainMenu/MainMenu.js" defer></script>
     <link rel="stylesheet" href="components/MainMenu/MainMenu.css">
 
+    <script src="components/MainPanel/MainPanel.js" defer></script>
+    <link rel="stylesheet" href="components/MainPanel/MainPanel.css">
+
     <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <main id="app">
         <v_main_menu @change="changeModule"></v_main_menu>
-        {{currentModule}}
+        <v_main_panel :module="currentModule" :key="currentModule.id"></v_main_panel>
     </main>
 </body>
 

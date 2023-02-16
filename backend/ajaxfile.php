@@ -19,4 +19,10 @@ switch ($request) {
 
         genericRequest($link, "CALL sp_get_modules($user, $corporation)");
         break;
+    case "getSubmodules":
+        $user = $_SESSION["id"];
+        $corporation = $_SESSION["corporation"];
+
+        genericRequest($link, "CALL sp_get_submodules($user, $corporation, $data->module)");
+        break;
 }
