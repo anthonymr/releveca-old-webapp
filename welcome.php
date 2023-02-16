@@ -24,6 +24,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <title>LYC Project</title>
 
     <link rel="stylesheet" href="./css/generalStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -40,7 +41,8 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
 <body>
     <main id="app">
-        <v_main_menu></v_main_menu>
+        <v_main_menu @change="changeModule"></v_main_menu>
+        {{currentModule}}
     </main>
 </body>
 

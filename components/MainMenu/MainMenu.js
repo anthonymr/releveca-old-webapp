@@ -16,7 +16,8 @@ Vue.component('v_main_menu', {
             <div class="main-menu__modules-wrapper" 
                 :class="activeMobileMenu ? 'active-mobile-menu__modules-wrapper' : ''"            
                 >
-                <div v-for="module in modules">
+                <div v-for="module in modules" @click="changeModule(module.id)">
+                    <i :class="module.icon"></i>
                     {{module.name}}
                 </div>
             </div>
@@ -40,5 +41,10 @@ Vue.component('v_main_menu', {
             .then((response) => {this.modules = response.data;})
             .catch((error) => console.error(error));
         },
+
+        changeModule(id){
+            this.$emit('change', id);
+            this.activeMobileMenu = false;
+        }
     },
 });

@@ -11,6 +11,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    overflow: hidden;
 }
 
 .active-mobile-menu__wrapper {
@@ -71,4 +72,10 @@
     padding: 20px 40px;
     cursor: pointer;
     user-select: none;
+    color: var(--gray);
+}
+
+.main-menu__modules-wrapper > div > i {
+    color: var(--light-gray);
+    margin-right: 10px;
 }
