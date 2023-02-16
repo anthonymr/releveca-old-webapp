@@ -28,11 +28,19 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+
+    <script src="js/vendors/axios.js" defer></script>
+    <script src="js/vendors/vue.js" defer></script>
+
+    <script src="js/components/MainMenu.js" defer></script>
+
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
-    <?php echo $_SESSION['corporation']; ?>
-    <p>Cambiar corporación <a href="corporation.php">Click aquí</a>.</p>
+    <main id="app">
+        <v_main_menu></v_main_menu>
+    </main>
 </body>
 
 </html>
