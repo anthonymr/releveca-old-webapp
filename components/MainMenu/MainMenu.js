@@ -17,7 +17,7 @@ Vue.component('v_main_menu', {
                 :class="activeMobileMenu ? 'active-mobile-menu__modules-wrapper' : ''"            
                 >
                 <div class="main-menu__corporation-picture">
-                    <img :src="'assets/images/corporations/' + modules[0].corporation_id + '.png'" >
+                    <img v-if="modules[0]?.corporation_id" :src="'assets/images/corporations/' + modules[0].corporation_id + '.png'" >
                 </div>
                 <hr>
                 <div v-for="module in modules" class="main-menu__module" @click="changeModule(module)" :class="seletedModule == module.id ? 'selected-module' : ''">
