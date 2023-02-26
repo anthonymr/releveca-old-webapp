@@ -13,6 +13,7 @@ $data = json_decode(file_get_contents("php://input"));
 $request = $data->request;
 $user = $_SESSION["id"];
 $corporation = $_SESSION["corporation"];
+$corporationName = getCorporationName($link, $corporation);
 
 switch ($request) {
     case "getModules":
@@ -25,6 +26,6 @@ switch ($request) {
         genericRequest($link, "CALL sp_get_all_submodules($user, $corporation)");
         break;
     case "getItems":
-        genericRequest($link, "select * from releveca.items limit 0,10");
+        genericRequest($link, "select * from $corporationName.items limit 0,10");
         break;
 }

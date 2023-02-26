@@ -77,3 +77,13 @@ function storePicture($url, $data){
 function valid_email($str) {
     return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
 }
+
+function getCorporationName($link, $corp) {
+    $data = mysqli_query($link, "select name from corporations where id = $corp");
+    $response = array();
+
+    while ($row = mysqli_fetch_assoc($data)) {
+        $response[] = $row;
+    }
+    return $response[0]['name'];
+}
