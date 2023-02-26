@@ -34,6 +34,12 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="js/vendors/axios.js" defer></script>
     <script src="js/vendors/vue.js" defer></script>
 
+    <script src="components/global/AlertList/Alert/Alert.js" defer></script>
+    <link rel="stylesheet" href="components/global/AlertList/Alert/Alert.css">
+
+    <script src="components/global/AlertList/AlertList.js" defer></script>
+    <link rel="stylesheet" href="components/global/AlertList/AlertList.css">
+
     <script src="components/MainMenu/MainMenu.js" defer></script>
     <link rel="stylesheet" href="components/MainMenu/MainMenu.css">
 
@@ -47,6 +53,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <main id="app">
         <v_main_menu @change="changeModule"></v_main_menu>
         <v_main_panel :module="currentModule" :key="currentModule.id"></v_main_panel>
+        <v_alert_list v-model="$alerts"></v_alert_list>
     </main>
 </body>
 
