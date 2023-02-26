@@ -24,15 +24,30 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <title>LYC Project</title>
 
     <link rel="stylesheet" href="./css/generalStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"  />
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+
+    <script src="js/vendors/axios.js" defer></script>
+    <script src="js/vendors/vue.js" defer></script>
+
+    <script src="components/MainMenu/MainMenu.js" defer></script>
+    <link rel="stylesheet" href="components/MainMenu/MainMenu.css">
+
+    <script src="components/MainPanel/MainPanel.js" defer></script>
+    <link rel="stylesheet" href="components/MainPanel/MainPanel.css">
+
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
-    <?php echo $_SESSION['corporation']; ?>
-    <p>Cambiar corporación <a href="corporation.php">Click aquí</a>.</p>
+    <main id="app">
+        <v_main_menu @change="changeModule"></v_main_menu>
+        <v_main_panel :module="currentModule" :key="currentModule.id"></v_main_panel>
+    </main>
 </body>
 
 </html>
