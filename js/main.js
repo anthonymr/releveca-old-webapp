@@ -5,12 +5,12 @@ const VueInstance = new Vue({
     el: "#app",
 
     data: {
-        currentModule: { "id": "1", "name": "Inicio", "icon": "" },
+        currentModule: {},
     },
 
     methods: {
-      changeModule(moduleId) {
-        this.currentModule = moduleId;
+      changeModule(module) {
+        this.currentModule = module;
       }  
     },
 });

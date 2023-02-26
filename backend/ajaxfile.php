@@ -24,4 +24,7 @@ switch ($request) {
     case "getAllSubmodules":
         genericRequest($link, "CALL sp_get_all_submodules($user, $corporation)");
         break;
+    case "getItems":
+        genericRequest($link, "select * from releveca.items limit 0,10");
+        break;
 }

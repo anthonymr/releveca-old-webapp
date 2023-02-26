@@ -1,0 +1,15 @@
+.header-location {
+    height: 70px;
+    padding-left: 70px;
+    line-height: 63px;
+    user-select: none;
+}
+
+.header-location > span:first-child {
+    color: var(--light-gray);
+}
+
+.header-location > span:nth-child(2) {
+    margin: 0 10px;
+    color: var(--primary);
+}

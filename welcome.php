@@ -48,6 +48,12 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/MainPanel/MainPanel.js" defer></script>
     <link rel="stylesheet" href="components/MainPanel/MainPanel.css">
 
+    <script src="components/HeaderLocation/HeaderLocation.js" defer></script>
+    <link rel="stylesheet" href="components/HeaderLocation/HeaderLocation.css">
+
+    <script src="components/Items/Items.js" defer></script>
+    <link rel="stylesheet" href="components/Items/Items.css">
+
     <script src="js/main.js" defer></script>
 </head>
 
