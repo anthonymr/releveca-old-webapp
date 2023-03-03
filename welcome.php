@@ -54,6 +54,9 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/Items/Items.js" defer></script>
     <link rel="stylesheet" href="components/Items/Items.css">
 
+    <script src="components/Item/Item.js" defer></script>
+    <link rel="stylesheet" href="components/Item/Item.css">
+
     <script src="js/main.js" defer></script>
 </head>
 

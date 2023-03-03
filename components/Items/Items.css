@@ -1,0 +1,25 @@
+.items-display {
+    display: flex;
+    justify-content: stretch;
+    gap: 10px;
+    padding: 0 20px 20px 20px;
+}
+
+.items-display > span {
+    display: block;
+    width: 60px;
+    height: 47px;
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray);
+    border-radius: 5px;
+}
+
+.items__container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

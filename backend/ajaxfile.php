@@ -26,6 +26,6 @@ switch ($request) {
         genericRequest($link, "CALL sp_get_all_submodules($user, $corporation)");
         break;
     case "getItems":
-        genericRequest($link, "SELECT * FROM $corporationName.items ORDER BY id LIMIT 0,10");
+        genericRequest($link, "SELECT * FROM $corporationName.items WHERE stock > 0 ORDER BY id LIMIT 0,10");
         break;
 }
