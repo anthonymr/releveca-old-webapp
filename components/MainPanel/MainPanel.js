@@ -4,6 +4,7 @@ Vue.component('v_main_panel', {
 template: `
         <section>
             <v_header_location :module="activeModule"></v_header_location>
+            <div class="main-panel__padding"></div>
 
             <div v-if="activeModule?.submodule?.id == 1">
                 <v_items></v_items>
@@ -15,9 +16,8 @@ template: `
             <div v-else-if="activeModule?.submodule?.id == 6"></div>
             <div v-else-if="activeModule?.submodule?.id == 7"></div>
             <div v-else-if="activeModule?.submodule?.id == 8"></div>
-            <div v-else-if="activeModule?.submodule?.id == 8"></div>
-            <div v-else>
-            </div>
+            <div v-else-if="activeModule?.submodule?.id == 9"></div>
+            <div v-else></div>
         </section>
     `,
     computed: {
