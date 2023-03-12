@@ -57,12 +57,16 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/Item/Item.js" defer></script>
     <link rel="stylesheet" href="components/Item/Item.css">
 
+    <script src="components/Cart/Cart.js" defer></script>
+    <link rel="stylesheet" href="components/Cart/Cart.css">
+
     <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <main id="app">
         <v_main_menu @change="changeModule"></v_main_menu>
+        <v_cart></v_cart>
         <v_main_panel :module="currentModule" :key="currentModule.id"></v_main_panel>
         <v_alert_list v-model="$alerts"></v_alert_list>
     </main>

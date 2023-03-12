@@ -11,7 +11,7 @@ Vue.component('v_items', {
                 </span>
             </div>
             <div class="items__container">
-                <v_item v-for="item in items" :item="item" :large="largeIcons" ></v_item>
+                <v_item v-for="item in items" :item="item" :large="largeIcons" :key="item.id" ></v_item>
             </div>
         </section>
     `,
