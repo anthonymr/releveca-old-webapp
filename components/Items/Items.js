@@ -10,9 +10,11 @@ Vue.component('v_items', {
                     <i class="fa-solid fa-table-cells-large"></i>
                 </span>
             </div>
+            <v_pagination @change="getItems" request="getItemsCount"></v_pagination>
             <div class="items__container">
                 <v_item v-for="item in items" :item="item" :large="largeIcons" :key="item.id" ></v_item>
             </div>
+            <v_pagination @change="getItems" request="getItemsCount"></v_pagination>
         </section>
     `,
 
@@ -24,14 +26,15 @@ Vue.component('v_items', {
     },
 
     created() {
-        this.getItems();
+        this.getItems(0, 10);
     },
 
     methods: {
-        getItems() {
-            axios.post(this.$ajax, { request: 'getItems' })
+        getItems(from, display) {
+            console.log({from, display});
+            axios.post(this.$ajax, { request: 'getItems', from, display })
                 .then((response) => { this.items = response.data; })
                 .catch((error) => console.error(error));
-        }
+        },
     },
 });

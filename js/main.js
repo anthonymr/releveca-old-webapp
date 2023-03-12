@@ -19,6 +19,7 @@ const VueInstance = new Vue({
 
     data: {
         currentModule: {},
+        currentPage: 1,
     },
 
     methods: {
