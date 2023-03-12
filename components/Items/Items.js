@@ -3,12 +3,15 @@ Vue.component('v_items', {
         <section class="items">
             <div class="items-display">
                 <input type="text" placeholder="buscar">
-                <span><i class="fa-solid fa-table-cells-large"></i></span>
-                <span><i class="fa-solid fa-table-list"></i></span>
-                <span><i class="fa-solid fa-file-pdf"></i></span>
+                <span v-if="largeIcons" @click="largeIcons = false">
+                    <i class="fa-solid fa-table-list"></i>
+                </span>
+                <span v-else @click="largeIcons = true">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                </span>
             </div>
             <div class="items__container">
-                <v_item v-for="item in items" :item="item"></v_item>
+                <v_item v-for="item in items" :item="item" :large="largeIcons" ></v_item>
             </div>
         </section>
     `,
@@ -16,6 +19,7 @@ Vue.component('v_items', {
     data() {
         return {
             items: [],
+            largeIcons: true,
         }
     },
 
