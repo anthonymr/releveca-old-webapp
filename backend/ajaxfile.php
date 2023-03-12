@@ -33,4 +33,15 @@ switch ($request) {
     case "getItemsCount":
         genericRequest($link, "SELECT count(*) AS count FROM $corporationName.items WHERE stock > 0");
         break;
+    case "storePicture":
+        $newImage = '../assets/images/items/'.$data->name;
+        echo $newImage;
+        storePicture($newImage , $data->pic);
+        if ($data->firstPicture){
+            genericUpdate($link, "UPDATE $corporationName.items SET `images` = '$data->name' WHERE (`id` = '$data->id');");
+        } else {
+            genericUpdate($link, "UPDATE $corporationName.items SET `images` = CONCAT_WS(',',`images`, '$data->name') WHERE (`id` = '$data->id');");
+        }
+        
+        break;
 }

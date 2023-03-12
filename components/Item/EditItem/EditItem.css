@@ -1,0 +1,16 @@
+.edit-item__image {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-item__image > label > img {
+    width: 200px;
+    border: 1px solid var(--border);
+    margin: 10px 0;
+}
+
+.edit-item__image input[type="file"] {
+    display: none;
+}

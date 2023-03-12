@@ -38,9 +38,14 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
     <script src="components/global/AlertList/Alert/Alert.js" defer></script>
     <link rel="stylesheet" href="components/global/AlertList/Alert/Alert.css">
+    <script src="components/global/AlertList/AlertList.js" defer></script>
+    <link rel="stylesheet" href="components/global/AlertList/AlertList.css">
 
     <script src="components/global/Pagination/Pagination.js" defer></script>
     <link rel="stylesheet" href="components/global/Pagination/Pagination.css">
+
+    <script src="components/global/Modal/Modal.js" defer></script>
+    <link rel="stylesheet" href="components/global/Modal/Modal.css">
 
     <script src="components/MainMenu/MainMenu.js" defer></script>
     <link rel="stylesheet" href="components/MainMenu/MainMenu.css">
@@ -56,6 +61,8 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
     <script src="components/Item/Item.js" defer></script>
     <link rel="stylesheet" href="components/Item/Item.css">
+    <script src="components/Item/EditItem/EditItem.js" defer></script>
+    <link rel="stylesheet" href="components/Item/EditItem/EditItem.css">
 
     <script src="components/Cart/Cart.js" defer></script>
     <link rel="stylesheet" href="components/Cart/Cart.css">

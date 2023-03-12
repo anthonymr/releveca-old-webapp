@@ -11,9 +11,7 @@ Vue.component('v_item', {
                     <div class="item__icon">
                         <i class="fa-solid fa-circle-info fa-fw"></i>
                     </div>
-                    <div class="item__icon">
-                        <i class="fa-solid fa-pen fa-fw"></i>
-                    </div>
+                    <v_edit_item :item="item" @close="$emit('refresh')"></v_edit_item>
                 </div>
                 <div class="item__price">
                     <div>{{price}}</div>
@@ -54,8 +52,9 @@ Vue.component('v_item', {
 
     computed: {
         img(){
-            if(this.imageError) return `assets/images/logo-placeholder.svg`;
-            return `assets/images/items/${this.item.id}_1.jpg`;
+            if(this.imageError || !this.item.images) return `assets/images/logo-placeholder.svg`;
+            const name = this.item.images.split(',')[0];
+            return `assets/images/items/${name}?${Date.now()}`;
         },
         itemName(){
             const words = this.item.name.trim().split(" ");
