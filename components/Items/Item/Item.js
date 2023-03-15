@@ -5,8 +5,8 @@ Vue.component('v_item', {
             <div class="item__header">
                 <div class="item__icons">
                     <div class="item__icon item__icon-input">
-                        <input type="number" min="1" v-model="value" />
-                        <i class="fa-solid fa-circle-plus fa-fw"></i>
+                        <input type="number" min="1" v-model="value"/>
+                        <i class="fa-solid fa-circle-plus fa-fw" @click="$root.addToCart(item, value)"></i>
                     </div>
                     <div class="item__icon">
                         <i class="fa-solid fa-circle-info fa-fw"></i>
@@ -47,7 +47,7 @@ Vue.component('v_item', {
     methods: {
         error(e){
             this.imageError = true;
-        }
+        },
     },
 
     computed: {
@@ -68,6 +68,6 @@ Vue.component('v_item', {
         },
         price(){
             return `${parseFloat(this.item.price).toFixed(2)} USD`;
-        }
+        },
     }
 });

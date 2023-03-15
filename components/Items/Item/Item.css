@@ -28,6 +28,17 @@
     color: white;
 }
 
+.item__icon-input > i {
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.item__icon-input > i:active {
+    color: #666;
+}
+
+
 .item__icon-input input {
     width: 30px;
     border: none;

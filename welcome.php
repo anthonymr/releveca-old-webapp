@@ -36,6 +36,9 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="js/vendors/axios.js" defer></script>
     <script src="js/vendors/vue.js" defer></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue-select@3.20.2/dist/vue-select.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-select@3.20.2/dist/vue-select.min.css" rel="stylesheet">
+
     <script src="components/global/AlertList/Alert/Alert.js" defer></script>
     <link rel="stylesheet" href="components/global/AlertList/Alert/Alert.css">
     <script src="components/global/AlertList/AlertList.js" defer></script>

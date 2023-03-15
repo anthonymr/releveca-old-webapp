@@ -67,6 +67,9 @@ switch ($request) {
             )
         ");
         break;
+    case "getClientsForInput":
+        genericRequest($link, "SELECT name, code FROM $corporationName.clients WHERE inactive = 0 ORDER BY name");
+        break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
         echo $newImage;

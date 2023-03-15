@@ -40,7 +40,7 @@ input[type="password"] {
   color: white;
 }
 
-button,
+button:not(.vs__clear),
 input[type="submit"],
 input[type="reset"] {
   width: 100%;
@@ -49,6 +49,13 @@ input[type="reset"] {
   border: none;
   border-radius: 3px;
   background-color: var(--primary);
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+button:disabled {
+  background-color: var(--secondary);
   color: white;
 }
 
@@ -172,4 +179,32 @@ button.secondary a {
 
 .card__line {
   padding: 2px 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+
+.fade-enter, .fade-leave-to {
+opacity: 0;
+}
+
+.quick-enter-active, .quick-leave-active {
+  transition: opacity .1s;
+}
+
+.quick-enter, .quick-leave-to {
+opacity: 0;
+}
+
+.vs__search, 
+.vs__selected,
+.vs__dropdown-menu {
+  font-size: 12px !important;
+  color: #666 !important;
+  overflow-x: hidden;
+}
+
+.vs__selected-options {
+  overflow-x: hidden;
 }
