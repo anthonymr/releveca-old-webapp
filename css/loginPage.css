@@ -1,8 +1,19 @@
 html {
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/login-background.svg');
+    background: #485563;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
     background-size: cover;
+}
+
+h2 {
+    color: var(--border);
+}
+
+p {
+    color: var(--border);
 }
 
 .login-page {
@@ -20,18 +31,16 @@ html {
     padding: 20px;
 }
 
-.logo-wrapper > div {
+.logo-wrapper>div {
     width: 40%;
     border-radius: 50%;
-    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-color: white;
 }
 
-.logo-wrapper > div > img {
+.logo-wrapper>div>img {
     width: 100%;
     border-radius: 50%;
 
@@ -42,21 +51,19 @@ html {
     flex-direction: column;
     gap: 15px;
     width: calc(100% - 80px);
-    padding: 20px;
+    padding: 30px;
     margin: 0 40px;
     border-radius: 5px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.form-wrapper > p {
+.form-wrapper>p {
     font-size: 14px;
-    color: var(--gray);
+    color: var(--border);
 }
 
-.form-wrapper > p > a {
+.form-wrapper>p>a {
     text-decoration: none;
-    color: var(--black);
+    color: var(--secondary);
 }
 
 .form-error {

@@ -26,6 +26,36 @@ switch ($request) {
         genericRequest($link, "CALL sp_get_all_submodules($user, $corporation)");
         break;
     case "getItems":
-        genericRequest($link, "select * from $corporationName.items limit 0,10");
+        $from = $data->from;
+        $display = $data->display;
+        $filter = $data->filter;
+        genericRequest($link, "SELECT * FROM $corporationName.items WHERE stock > 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+                OR model like '%$filter%'
+            )
+            ORDER BY id LIMIT $from, $display");
+        break;
+    case "getItemsCount":
+        $filter = $data->filter;
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.items WHERE stock > 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+                OR model like '%$filter%'
+            )
+        ");
+        break;
+    case "storePicture":
+        $newImage = '../assets/images/items/'.$data->name;
+        echo $newImage;
+        storePicture($newImage , $data->pic);
+        if ($data->firstPicture){
+            genericUpdate($link, "UPDATE $corporationName.items SET `images` = '$data->name' WHERE (`id` = '$data->id');");
+        } else {
+            genericUpdate($link, "UPDATE $corporationName.items SET `images` = CONCAT_WS(',',`images`, '$data->name') WHERE (`id` = '$data->id');");
+        }
+        
         break;
 }

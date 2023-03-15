@@ -4,13 +4,15 @@
     --black: #131313;
     --gray: #5c5c5c;
     --light-gray: #b1b1b1;
-    --border: #e8e8e8;
+    --border: #b1b1b1;
 
     --primary: rgb(235, 74, 74);
     --secondary: #e8e8e8;
 
     --error-background: rgb(239, 207, 207);
     --error: rgb(235, 74, 74);
+
+   
 }
 
 *,
@@ -34,6 +36,8 @@ input[type="password"] {
     padding: 0 15px;
     border: 1px solid var(--border);
     border-radius: 3px;
+    background-color: transparent;
+    color: white;
 }
 
 button,
