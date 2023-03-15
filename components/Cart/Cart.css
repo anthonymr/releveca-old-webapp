@@ -32,3 +32,12 @@
     bottom: -5px;
     right: 0;
 }
+
+.cart__list {
+    position: fixed;
+    top: 60px;
+    right: 7px;
+    z-index: 100;
+    background-color: white;
+    padding: 20px;
+}

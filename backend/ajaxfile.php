@@ -47,6 +47,26 @@ switch ($request) {
             )
         ");
         break;
+    case "getClients":
+        $from = $data->from;
+        $display = $data->display;
+        $filter = $data->filter;
+        genericRequest($link, "SELECT * FROM $corporationName.clients WHERE inactive = 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+            )
+            ORDER BY id LIMIT $from, $display");
+        break;
+    case "getClientsCount":
+        $filter = $data->filter;
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.clients WHERE inactive = 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+            )
+        ");
+        break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
         echo $newImage;

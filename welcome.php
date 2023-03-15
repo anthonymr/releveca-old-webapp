@@ -56,16 +56,20 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/HeaderLocation/HeaderLocation.js" defer></script>
     <link rel="stylesheet" href="components/HeaderLocation/HeaderLocation.css">
 
-    <script src="components/Items/Items.js" defer></script>
-    <link rel="stylesheet" href="components/Items/Items.css">
-
-    <script src="components/Items/Item/Item.js" defer></script>
-    <link rel="stylesheet" href="components/Items/Item/Item.css">
-    <script src="components/Items/EditItem/EditItem.js" defer></script>
-    <link rel="stylesheet" href="components/Items/EditItem/EditItem.css">
-
     <script src="components/Cart/Cart.js" defer></script>
     <link rel="stylesheet" href="components/Cart/Cart.css">
+
+    <script src="components/Items/Items.js" defer></script>
+    <script src="components/Items/Item/Item.js" defer></script>
+    <script src="components/Items/EditItem/EditItem.js" defer></script>
+    <link rel="stylesheet" href="components/Items/Items.css">
+    <link rel="stylesheet" href="components/Items/Item/Item.css">
+    <link rel="stylesheet" href="components/Items/EditItem/EditItem.css">
+
+    <script src="components/Clients/Clients.js" defer></script>
+    <script src="components/Clients/Client/Client.js" defer></script>
+    <link rel="stylesheet" href="components/Clients/Clients.css">
+    <link rel="stylesheet" href="components/Clients/Client/Client.css">
 
     <script src="js/main.js" defer></script>
 </head>

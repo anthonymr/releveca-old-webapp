@@ -1,7 +1,7 @@
 Vue.component('v_item', {
     props: ['item', 'large'],
     template: `
-        <article class="item">
+        <article class="card">
             <div class="item__header">
                 <div class="item__icons">
                     <div class="item__icon item__icon-input">
@@ -18,18 +18,18 @@ Vue.component('v_item', {
                     <div class="item__stock">{{inStock}}</div>
                 </div>
             </div>
-            <div class="item__main_container">
-                <div class="item__picture" v-if="large">
+            <div class="card__main_container">
+                <div class="card__picture" v-if="large">
                     <img :src="img" @error="error" />
                 </div>
-                <div class="item__info">
-                    <span class="item__code">
+                <div class="card__info">
+                    <span class="card__code">
                         {{item.code}}
                     </span>
-                    <span class="item__title">
+                    <span class="card__title">
                         {{itemName}}
                     </span>
-                    <span class="item__model">
+                    <span class="card__model">
                         {{item.model}}
                     </span>
                 </div>
@@ -57,10 +57,7 @@ Vue.component('v_item', {
             return `assets/images/items/${name}?${Date.now()}`;
         },
         itemName(){
-            const words = this.item.name.trim().split(" ");
-            return words.map((word) => { 
-                return word[0] + word.substring(1).toLowerCase(); 
-            }).join(" ");
+            return this.capitalize(this.item.name);
         },
         inStock(){
             const stock = parseFloat(this.item.stock);

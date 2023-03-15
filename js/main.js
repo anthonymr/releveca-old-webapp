@@ -20,6 +20,12 @@ Vue.mixin({
       const element = document.getElementById(elementId);
       element.scrollIntoView({ behavior });
     },
+    capitalize(str) {
+      const words = str.trim().split(" ");
+      return words.map((word) => { 
+          return word[0] + word.substring(1).toLowerCase(); 
+      }).join(" ");
+    }
   }
 })
 
@@ -29,12 +35,19 @@ const VueInstance = new Vue({
     data: {
         currentModule: {},
         currentPage: 1,
+        globalCart : [],
     },
 
     methods: {
       changeModule(module) {
         this.currentModule = module;
-      }  
+      },
+      addToCart(item, count) {
+        this.globalCart.push({ 
+          ... item,
+          count,
+        });
+      }
     },
 });
 
