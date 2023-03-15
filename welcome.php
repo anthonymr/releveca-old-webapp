@@ -59,10 +59,10 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/Items/Items.js" defer></script>
     <link rel="stylesheet" href="components/Items/Items.css">
 
-    <script src="components/Item/Item.js" defer></script>
-    <link rel="stylesheet" href="components/Item/Item.css">
-    <script src="components/Item/EditItem/EditItem.js" defer></script>
-    <link rel="stylesheet" href="components/Item/EditItem/EditItem.css">
+    <script src="components/Items/Item/Item.js" defer></script>
+    <link rel="stylesheet" href="components/Items/Item/Item.css">
+    <script src="components/Items/EditItem/EditItem.js" defer></script>
+    <link rel="stylesheet" href="components/Items/EditItem/EditItem.css">
 
     <script src="components/Cart/Cart.js" defer></script>
     <link rel="stylesheet" href="components/Cart/Cart.css">
