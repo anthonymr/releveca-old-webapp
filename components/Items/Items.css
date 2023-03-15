@@ -20,6 +20,9 @@
     border-radius: 5px 0 0 5px;
     border: 1px solid var(--secondary);
     border-right: none;
+    color: var(--black);
+    width: 100%;
+    padding-left: 15px;
 }
 
 .items__container {

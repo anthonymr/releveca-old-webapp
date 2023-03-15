@@ -2,7 +2,12 @@ Vue.component('v_items', {
     template: `
         <section class="items">
             <div class="items-display">
-                <input type="text" placeholder="buscar">
+                <input 
+                    type="search" 
+                    placeholder="buscar" 
+                    v-model="filter" 
+                    @keyup.enter="changeFilter"
+                >
                 <span v-if="largeIcons" @click="largeIcons = false">
                     <i class="fa-solid fa-table-list"></i>
                 </span>
@@ -10,11 +15,17 @@ Vue.component('v_items', {
                     <i class="fa-solid fa-table-cells-large"></i>
                 </span>
             </div>
-            <v_pagination @change="getItems" request="getItemsCount"></v_pagination>
-            <div class="items__container">
-                <v_item @refresh="getItems(0, 10)" v-for="item in items" :item="item" :large="largeIcons" :key="item.id" ></v_item>
-            </div>
-            <v_pagination @change="getItems" request="getItemsCount"></v_pagination>
+            <v_pagination @change="getItems" request="getItemsCount" :filter="paginationFilter">
+                <div slot="list" class="items__container">
+                    <v_item 
+                        @refresh="getItems(0, 10)" 
+                        v-for="item in items" :item="item" 
+                        :large="largeIcons" 
+                        :key="item.id" 
+                    >
+                    </v_item>
+                </div>
+            </v_pagination>
         </section>
     `,
 
@@ -22,6 +33,8 @@ Vue.component('v_items', {
         return {
             items: [],
             largeIcons: true,
+            filter: '',
+            paginationFilter: '',
         }
     },
 
@@ -30,8 +43,12 @@ Vue.component('v_items', {
     },
 
     methods: {
-        getItems(from, display) {
-            axios.post(this.$ajax, { request: 'getItems', from, display })
+        changeFilter(){
+            this.getItems(0, 10, this.filter);
+            this.paginationFilter = this.filter;
+        },
+        getItems(from, display, filter='') {
+            axios.post(this.$ajax, { request: 'getItems', from, display, filter })
                 .then((response) => { this.items = response.data; })
                 .catch((error) => console.error(error));
         },

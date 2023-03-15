@@ -1,35 +1,69 @@
 Vue.component('v_pagination', {
-    props: ['request'],
+    props: ['request', 'filter'],
     template: `
         <section>
-            <div class="pagination" v-if="pages <= 7">
-                <span v-for="index in pages" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
-                    {{index}}
-                </span>
+            <div>
+                <div class="pagination" v-if="pages <= 7">
+                    <span v-for="index in pages" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                </div>
+                <div class="pagination" v-else>
+                    <span @click="goTo($root.currentPage - 1)" class="no-background">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </span>
+                    <span v-for="index in firstPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span v-if="$root.currentPage > 5" class="no-background">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                    <span v-for="index in middlePages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span v-if="$root.currentPage < pages" class="no-background">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                    <span v-for="index in lastPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span @click="goTo($root.currentPage + 1)" class="no-background">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </span>
+                </div>
             </div>
-            <div class="pagination" v-else>
-                <span @click="goTo($root.currentPage - 1)" class="no-background">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </span>
-                <span v-for="index in firstPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
-                    {{index}}
-                </span>
-                <span v-if="$root.currentPage > 5" class="no-background">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </span>
-                <span v-for="index in middlePages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
-                    {{index}}
-                </span>
-                <span v-if="$root.currentPage < pages" class="no-background">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </span>
-                <span v-for="index in lastPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
-                    {{index}}
-                </span>
-                <span @click="goTo($root.currentPage + 1)" class="no-background">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </span>
+            <slot name="list"></slot>
+            <div>
+                <div class="pagination" v-if="pages <= 7">
+                    <span v-for="index in pages" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                </div>
+                <div class="pagination" v-else>
+                    <span @click="goTo($root.currentPage - 1)" class="no-background">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </span>
+                    <span v-for="index in firstPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span v-if="$root.currentPage > 5" class="no-background">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                    <span v-for="index in middlePages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span v-if="$root.currentPage < pages" class="no-background">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                    <span v-for="index in lastPages()" :key="index" @click="goTo(index)" :class="{'active': $root.currentPage == index}">
+                        {{index}}
+                    </span>
+                    <span @click="goTo($root.currentPage + 1)" class="no-background">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </span>
+                </div>
             </div>
+            
         </section>
     `,
 
@@ -37,7 +71,6 @@ Vue.component('v_pagination', {
         return {
             count: 0,
             itemsToDisplay: 10,
-            currentPage: 1,
         }
     },
 
@@ -53,10 +86,10 @@ Vue.component('v_pagination', {
             let display = this.itemsToDisplay;
             this.$root.currentPage = page;
 
-            this.$emit('change', from, display);
+            this.$emit('change', from, display, this.filter);
         },
         getCount() {
-            axios.post(this.$ajax, { request: this.request })
+            axios.post(this.$ajax, { request: this.request, filter: this.filter })
             .then((response) => { this.count = response.data[0].count })
             .catch((error) => console.error(error));
         },
@@ -83,6 +116,13 @@ Vue.component('v_pagination', {
         },
         lastPages(){
             return [this.pages];
+        }
+    },
+
+    watch: {
+        filter() {
+            this.getCount();
+            this.goTo(1);
         }
     },
 
