@@ -58,7 +58,6 @@ const VueInstance = new Vue({
         });
       },
       deleteItemFromCart(item) {
-        console.log("working");
         const existing = this.globalCart.filter((curItem) => curItem.code === item.code);
 
         if (!existing.length) return;
@@ -69,7 +68,6 @@ const VueInstance = new Vue({
       },
 
       deleteItemFromCartAll(item) {
-        console.log("working");
         const existing = this.globalCart.filter((curItem) => curItem.code === item.code);
 
         if (!existing.length) return;
