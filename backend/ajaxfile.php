@@ -29,11 +29,23 @@ switch ($request) {
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
-        genericRequest($link, "SELECT * FROM $corporationName.items WHERE stock > 0 AND name like '%$filter%' ORDER BY id LIMIT $from, $display");
+        genericRequest($link, "SELECT * FROM $corporationName.items WHERE stock > 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+                OR model like '%$filter%'
+            )
+            ORDER BY id LIMIT $from, $display");
         break;
     case "getItemsCount":
         $filter = $data->filter;
-        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.items WHERE stock > 0 AND name like '%$filter%'");
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.items WHERE stock > 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+                OR model like '%$filter%'
+            )
+        ");
         break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
