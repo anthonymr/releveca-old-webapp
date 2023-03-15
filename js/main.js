@@ -14,6 +14,15 @@ Vue.prototype.$default = {
   }
 };
 
+Vue.mixin({
+  methods: {
+    scrollTo(elementId, behavior='smooth') {
+      const element = document.getElementById(elementId);
+      element.scrollIntoView({ behavior });
+    },
+  }
+})
+
 const VueInstance = new Vue({
     el: "#app",
 

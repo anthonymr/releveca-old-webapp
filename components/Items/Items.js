@@ -1,6 +1,6 @@
 Vue.component('v_items', {
     template: `
-        <section class="items">
+        <section class="items" id="start">
             <div class="items-display">
                 <input 
                     type="search" 
@@ -24,6 +24,10 @@ Vue.component('v_items', {
                         :key="item.id" 
                     >
                     </v_item>
+
+                    <div v-if="!items.length">
+                        No se ha encontrado ningún artículo.
+                    </div>
                 </div>
             </v_pagination>
         </section>
@@ -49,7 +53,10 @@ Vue.component('v_items', {
         },
         getItems(from, display, filter='') {
             axios.post(this.$ajax, { request: 'getItems', from, display, filter })
-                .then((response) => { this.items = response.data; })
+                .then((response) => { 
+                    this.items = response.data;
+                    this.scrollTo('start');
+                })
                 .catch((error) => console.error(error));
         },
     },
