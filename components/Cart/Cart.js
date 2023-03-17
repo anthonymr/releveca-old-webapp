@@ -44,18 +44,56 @@ template: `
                     </div>
                 </div>
 
-                <div class="cart_client" v-if="$root.globalCartCount">
+                <div class="cart__total" v-if="$root.globalCartCount">
+                    <div>
+                        <label>sub-total: {{selectedCurrency.code}}</label>
+                        <div>{{subTotal.toFixed(2)}}</div>
+                    </div>
+                    <div>
+                        <label>IVA: {{selectedCurrency.code}}</label>
+                        <div>{{taxes.toFixed(2)}}</div>
+                    </div>
+                    <div>
+                        <label>Total: {{selectedCurrency.code}}</label>
+                        <div>{{total.toFixed(2)}}</div>
+                    </div>
+                </div>
+
+                <div class="cart__payment" v-if="$root.globalCartCount">
+                    <div>
+                        <label>IMP <input v-model="selectedTax" type="checkbox" /></label>
+                    </div>
+                    <v-select 
+                        :options="conditions"
+                        placeholder="Cond. pago"
+                        label="description"
+                        v-model="selectedCondition"
+                        :clearable="false"
+                    >
+                    </v-select>
+                    <v-select 
+                        :options="currencies"
+                        placeholder="Moneda"
+                        label="code"
+                        v-model="selectedCurrency"
+                        :clearable="false"
+                    >
+                    </v-select>
+                </div>
+
+                <div class="cart__client" v-if="$root.globalCartCount">
                     <v-select 
                         :options="clients"
                         placeholder="Cliente"
                         label="name"
                         v-model="selectedClient"
+                        @option:selecting="setTax"
                     >
                     </v-select>
                 </div>
 
                 <div class="cart__buttons">
-                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="createBudget">Crear presupuesto</button>
+                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="createBudget">Crear proforma</button>
                     <button v-if="$root.globalCartCount" @click="$root.deleteAllItemsFromCart()" class="secondary">Limpiar carrito</button>
                 </div>
             </section>
@@ -66,12 +104,19 @@ template: `
         return {
             isOpen: false,
             clients: [],
+            currencies: [],
+            conditions: [],
             selectedClient: null,
+            selectedCurrency: null,
+            selectedTax: false,
+            selectedCondition: null,
         }
     },
 
     created(){
         this.getClients();
+        this.getCurrencies();
+        this.getConditions();
     },
 
     methods: {
@@ -82,13 +127,58 @@ template: `
         },
         getClients() {
             axios.post(this.$ajax, { request: 'getClientsForInput' })
-            .then((response) => { 
-                this.clients = response.data;
+            .then((response) => this.clients = response.data)
+            .catch((error) => console.error(error));
+        },
+        getCurrencies() {
+            axios.post(this.$ajax, { request: 'getCurrencies' })
+            .then((response) => {
+                this.currencies = response.data;
+                this.selectedCurrency = this.currencies.filter((cur) => cur.default === '1')[0];
             })
+            .catch((error) => console.error(error));
+        },
+        getConditions() {
+            axios.post(this.$ajax, { request: 'getConditions' })
+            .then((response) => this.conditions = response.data)
             .catch((error) => console.error(error));
         },
         createBudget(){
             // console.log("working");
+        },
+        setTax(selected){
+            if(selected.taxpayer === '1') this.selectedTax = true;
         }
     },
+
+    computed: {
+        rate() {
+            let rate = 1;
+
+            if(this.selectedCurrency.code !== this.baseCurreny.code) {
+                if (this.selectedCurrency.code === this.countryCurrency.code) {
+                    rate = parseFloat(this.baseCurreny.rate);
+                } else {
+                    rate = parseFloat(this.selectedCurrency.rate);
+                }
+            }
+
+            return rate;
+        },
+        subTotal() {
+            return this.$root.globalCart.reduce((acc, cur) => acc + (cur.count * parseFloat(cur.price)) , 0) * this.rate;
+        },
+        taxes() {
+            return this.selectedTax ? this.subTotal * 0.16 : 0.00;
+        },
+        total() {
+            return this.subTotal + this.taxes;
+        },
+        baseCurreny() {
+            return this.currencies.filter((cur) => cur.base === '1')[0];
+        },
+        countryCurrency() {
+            return this.currencies.filter((cur) => parseFloat(cur.rate) === 1)[0];
+        }
+    }
 });

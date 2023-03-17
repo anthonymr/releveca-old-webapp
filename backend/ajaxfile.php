@@ -68,7 +68,7 @@ switch ($request) {
         ");
         break;
     case "getClientsForInput":
-        genericRequest($link, "SELECT name, code FROM $corporationName.clients WHERE inactive = 0 ORDER BY name");
+        genericRequest($link, "SELECT name, code, taxpayer FROM $corporationName.clients WHERE inactive = 0 ORDER BY name");
         break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
@@ -80,5 +80,11 @@ switch ($request) {
             genericUpdate($link, "UPDATE $corporationName.items SET `images` = CONCAT_WS(',',`images`, '$data->name') WHERE (`id` = '$data->id');");
         }
         
+        break;
+    case "getCurrencies":
+        genericRequest($link, "SELECT * FROM $corporationName.currency");
+        break;
+    case "getConditions":
+        genericRequest($link, "SELECT * FROM $corporationName.conditions");
         break;
 }
