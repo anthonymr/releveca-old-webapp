@@ -1,0 +1,36 @@
+.quote__container {
+  font-size: 12px;
+  padding: 10px 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.quote__id {
+  width: 30px;
+  color: var(--primary);
+}
+
+.quote__description {
+  width: calc(100% - 200px);
+  overflow: hidden;
+}
+
+.quote__price {
+  width: 100px;
+  text-align: right;
+  color: var(--primary);
+}
+
+.quote__status {
+  width: 70px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.quote__status > span {
+  background-color: #666;
+  color: white;
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 10px;
+}

@@ -101,7 +101,7 @@ template: `
                 </div>
 
                 <div class="cart__buttons">
-                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="createBudget">Crear proforma</button>
+                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="setQuote">Crear proforma</button>
                     <button v-if="$root.globalCartCount" @click="$root.deleteAllItemsFromCart()" class="secondary">Limpiar carrito</button>
                 </div>
             </section>
@@ -128,11 +128,6 @@ template: `
     },
 
     methods: {
-        img(item) {
-            if(!item.images) return `assets/images/logo-placeholder.svg`;
-            const name = item.images.split(',')[0];
-            return `assets/images/items/${name}?${Date.now()}`;
-        },
         getClients() {
             axios.post(this.$ajax, { request: 'getClientsForInput' })
             .then((response) => this.clients = response.data)
@@ -146,13 +141,37 @@ template: `
             })
             .catch((error) => console.error(error));
         },
+        setQuote(){
+            const details = this.$root.globalCart.filter((line) => line.count > 0).map((line) => ({
+                item_id: line.id,
+                qty: line.count,
+                unit: line.unit,
+                unit_price: parseFloat(line.price) * this.rate,
+                total: parseFloat(line.count) * parseFloat(line.price) * this.rate,
+            }));
+
+            axios.post(this.$ajax, { request: 'setQuote',  
+            id:this.selectedClient.id, 
+            sub_total:this.subTotal, 
+            taxes:this.taxes, 
+            total:this.total, 
+            condition:this.selectedCondition.code, 
+            rate:this.selectedCurrency.rate, 
+            currency:this.selectedCurrency.code,
+            details
+        })
+            .then((response) => {
+                console.log(response.data);
+                this.$root.deleteAllItemsFromCart();
+                this.isOpen = false;
+                this.$alerts.push({message: 'Proforma creada correctamente.', type: 'ok'});
+            })
+            .catch(() => this.$alerts.push({message: 'Error creando la proforma.', type: 'alert'}));
+        },
         getConditions() {
             axios.post(this.$ajax, { request: 'getConditions' })
             .then((response) => this.conditions = response.data)
             .catch((error) => console.error(error));
-        },
-        createBudget(){
-            // console.log("working");
         },
         setTax(selected) {
             if(selected.taxpayer === '1') this.selectedTax = true;
@@ -164,7 +183,12 @@ template: `
         itemTotalPrice(item) {
             const strPrice = (parseFloat(item.price) * this.rate * item.count).toFixed(2);
             return `${strPrice} ${this.selectedCurrency.code}`;
-        }
+        },
+        img(item) {
+            if(!item.images) return `assets/images/logo-placeholder.svg`;
+            const name = item.images.split(',')[0];
+            return `assets/images/items/${name}?${Date.now()}`;
+        },
     },
 
     computed: {

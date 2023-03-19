@@ -74,6 +74,11 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="stylesheet" href="components/Clients/Clients.css">
     <link rel="stylesheet" href="components/Clients/Client/Client.css">
 
+    <script src="components/Quotes/Quotes.js" defer></script>
+    <script src="components/Quotes/Quote/Quote.js" defer></script>
+    <link rel="stylesheet" href="components/Quotes/Quotes.css">
+    <link rel="stylesheet" href="components/Quotes/Quote/Quote.css">
+
     <script src="js/main.js" defer></script>
 </head>
 
