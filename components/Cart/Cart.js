@@ -26,8 +26,16 @@ template: `
                             <img :src="img(item)" />
                         </div>
                         <div class="cart__name">
-                            <div class="card__code">
-                                {{item.count}} {{item.unit}}
+                            <div class="cart__code">
+                                <div>
+                                    {{item.count}} {{item.unit}}
+                                </div>
+                                <div>
+                                    {{itemPrice(item)}}
+                                </div>
+                                <div>
+                                    {{itemTotalPrice(item)}}
+                                </div>
                             </div>
                             <div class="card__title">
                                 {{capitalize(item.name)}}
@@ -146,8 +154,16 @@ template: `
         createBudget(){
             // console.log("working");
         },
-        setTax(selected){
+        setTax(selected) {
             if(selected.taxpayer === '1') this.selectedTax = true;
+        },
+        itemPrice(item) {
+            const strPrice = (parseFloat(item.price) * this.rate).toFixed(2);
+            return `${strPrice} ${this.selectedCurrency.code}`;
+        },
+        itemTotalPrice(item) {
+            const strPrice = (parseFloat(item.price) * this.rate * item.count).toFixed(2);
+            return `${strPrice} ${this.selectedCurrency.code}`;
         }
     },
 

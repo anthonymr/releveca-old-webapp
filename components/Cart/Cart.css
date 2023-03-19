@@ -161,3 +161,20 @@
 .cart__total label {
     color: #666;
 }
+
+div.cart__name > div.cart__code {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 12px;
+    color: var(--light-gray);
+}
+
+div.cart__code > div:first-child {
+    color: var(--primary);
+}
+
+div.cart__code > div:last-child {
+    color: var(--black);
+}
