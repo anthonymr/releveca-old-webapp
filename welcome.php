@@ -76,8 +76,13 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
     <script src="components/Quotes/Quotes.js" defer></script>
     <script src="components/Quotes/Quote/Quote.js" defer></script>
+    <script src="components/Quotes/QuoteDetails/QuoteDetails.js" defer></script>
+    <script src="components/Quotes/QuotesApproval/QuotesApproval.js" defer></script>
     <link rel="stylesheet" href="components/Quotes/Quotes.css">
     <link rel="stylesheet" href="components/Quotes/Quote/Quote.css">
+    <link rel="stylesheet" href="components/Quotes/QuoteDetails/QuoteDetails.css">
+    <link rel="stylesheet" href="components/Quotes/QuotesApproval/QuotesApproval.css">
+    
 
     <script src="js/main.js" defer></script>
 </head>

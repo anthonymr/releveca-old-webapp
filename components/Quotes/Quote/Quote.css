@@ -1,8 +1,17 @@
+.card.quote {
+  max-width: 1200px;
+}
+
 .quote__container {
   font-size: 12px;
   padding: 10px 5px;
   user-select: none;
   cursor: pointer;
+}
+
+.quote__container > div {
+  display: flex;
+  align-items: center;
 }
 
 .quote__id {
@@ -11,7 +20,7 @@
 }
 
 .quote__description {
-  width: calc(100% - 200px);
+  width: calc(100% - 230px);
   overflow: hidden;
 }
 
@@ -23,14 +32,11 @@
 
 .quote__status {
   width: 70px;
-  display: flex;
   justify-content: flex-end;
 }
 
-.quote__status > span {
-  background-color: #666;
-  color: white;
-  border-radius: 3px;
-  padding: 0 5px;
-  font-size: 10px;
+.quote__button {
+  width: 30px;
+  justify-content: center;
+  padding-left: 10px;
 }

@@ -12,7 +12,11 @@
   --error-background: rgb(239, 207, 207);
   --error: rgb(235, 74, 74);
 
-
+  --info:#409eff;
+  --ok:#67c23a;
+  --warning:#e6a23c;
+  --danger:#f56c6c;
+  --default:#909399;
 }
 
 *,
@@ -85,7 +89,7 @@ button.secondary a {
 
 .list-display {
   display: flex;
-  justify-content: stretch;
+  justify-content: center;
   padding: 0 10px 0 10px;
 }
 
@@ -108,6 +112,7 @@ button.secondary a {
   color: var(--black);
   width: 100%;
   padding-left: 15px;
+  max-width: 1140px;
 }
 
 .list__container {
@@ -207,4 +212,100 @@ opacity: 0;
 
 .vs__selected-options {
   overflow-x: hidden;
+}
+
+table {
+  color: var(--black);
+  font-size: 12px;
+  width: 100%;
+}
+
+table th {
+  border-left: 1px solid var(--border);
+  text-align: center;
+}
+
+table th:first-child {
+  border: none;
+}
+
+table td {
+  padding: 5px;
+  border-left: 1px solid var(--border);
+}
+
+
+table td:first-child {
+  border: none;
+}
+
+table tr:nth-child(even) {
+  background-color: rgb(236, 236, 236);
+}
+
+table td.right {
+  text-align: right;
+}
+
+table td.left {
+  text-align: left;
+}
+
+table td.center {
+  text-align: center;
+}
+
+tfoot tr td {
+  background-color: white;
+}
+
+tfoot tr td:first-child {
+  text-align: right;
+  font-weight: 600;
+}
+
+.label {
+  color: white;
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 10px;
+  background-color: var(--default);
+}
+
+.label.ok {
+  background-color: var(--ok);
+}
+
+.label.danger {
+  background-color: var(--danger);
+}
+
+.label.warning {
+  background-color: var(--warning);
+}
+
+.label.info {
+  background-color: var(--info);
+}
+
+.label.default {
+  background-color: var(--default);
+}
+
+.form-line {
+  font-size: 12px;
+  color: var(--black);
+  padding: 5px 20px 10px 0;
+  display: flex;
+}
+
+.form-line > label {
+  font-weight: 600;
+  display: block;
+  margin-right: 5px;
+}
+
+.form-flex {
+  display: flex;
+  flex-wrap: wrap;
 }

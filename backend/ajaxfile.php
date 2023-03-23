@@ -113,7 +113,7 @@ switch ($request) {
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
-        genericRequest($link, "SELECT *, quotes.id AS quote_id FROM $corporationName.quotes
+        genericRequest($link, "SELECT *, quotes.id AS quote_id, quotes.index AS quote_index FROM $corporationName.quotes
             LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
             LEFT JOIN $corporationName.conditions ON conditions.code = quotes.condition
             LEFT JOIN $corporationName.currency ON currency.code = quotes.currency
@@ -127,5 +127,34 @@ switch ($request) {
             LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
             WHERE clients.name like '%$filter%'
         ");
+        break;
+    case "getQuoteDetails":
+        $sql = "SELECT quotes_details.*, items.name FROM $corporationName.quotes_details 
+        LEFT JOIN $corporationName.items ON items.id = item_id
+        WHERE quote_id = '$data->id'";
+        genericRequest($link, $sql);
+        break;
+    case "getQuotesForApproval":
+        $from = $data->from;
+        $display = $data->display;
+        $filter = $data->filter;
+        genericRequest($link, "SELECT *, quotes.id AS quote_id, quotes.index AS quote_index FROM $corporationName.quotes
+            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
+            LEFT JOIN $corporationName.conditions ON conditions.code = quotes.condition
+            LEFT JOIN $corporationName.currency ON currency.code = quotes.currency
+            WHERE clients.name like '%$filter%' AND status = 'en espera'
+            ORDER BY quotes.creation_date DESC LIMIT $from, $display
+        ");
+        break;
+    case "getQuotesForApprovalCount":
+        $filter = $data->filter;
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.quotes
+            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
+            WHERE clients.name like '%$filter%' AND status = 'en espera'
+        ");
+        break;
+    case "approveQuote":
+        $sql = "UPDATE `releveca`.`quotes` SET `approved` = '1' WHERE (`id` = '$data->id');";
+        genericUpdate($link, $sql);
         break;
 }

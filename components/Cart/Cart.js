@@ -174,7 +174,7 @@ template: `
             .catch((error) => console.error(error));
         },
         setTax(selected) {
-            if(selected.taxpayer === '1') this.selectedTax = true;
+            this.selectedTax = selected.taxpayer === '1' ? true : false;
         },
         itemPrice(item) {
             const strPrice = (parseFloat(item.price) * this.rate).toFixed(2);

@@ -27,6 +27,9 @@ Vue.mixin({
       return words.map((word) => { 
           return word[0] + word.substring(1).toLowerCase(); 
       }).join(" ");
+    },
+    toFixed(str) {
+      return parseFloat(str).toFixed(2);
     }
   }
 })
