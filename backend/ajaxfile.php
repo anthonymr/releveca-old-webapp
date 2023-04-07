@@ -52,6 +52,7 @@ switch ($request) {
         $display = $data->display;
         $filter = $data->filter;
         genericRequest($link, "SELECT * FROM $corporationName.clients WHERE inactive = 0 
+            AND owner = $user
             AND ( 
                 name like '%$filter%'
                 OR code like '%$filter%'
@@ -61,6 +62,7 @@ switch ($request) {
     case "getClientsCount":
         $filter = $data->filter;
         genericRequest($link, "SELECT count(*) AS count FROM $corporationName.clients WHERE inactive = 0 
+            AND owner = $user
             AND ( 
                 name like '%$filter%'
                 OR code like '%$filter%'
@@ -68,7 +70,7 @@ switch ($request) {
         ");
         break;
     case "getClientsForInput":
-        genericRequest($link, "SELECT id, name, code, taxpayer FROM $corporationName.clients WHERE inactive = 0 ORDER BY name");
+        genericRequest($link, "SELECT id, name, code, taxpayer FROM $corporationName.clients WHERE inactive = 0 AND owner = $user ORDER BY name");
         break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;

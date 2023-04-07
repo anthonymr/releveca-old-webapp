@@ -1,0 +1,58 @@
+.form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.form-container > form {
+  width: 100%;
+  max-width: 800px;
+  padding: 10px 30px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-container h3 {
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--secondary);
+  padding-bottom: 11px;
+}
+
+.form-line {
+  display: flex;
+  gap: 10px;
+}
+
+.form-line > div {
+  width: calc(100% - 150px);
+  display: flex;
+  gap: 10px;
+}
+
+.form-line > label {
+  width: 150px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.form-line input {
+  line-height: 24px;
+  color: var(--black);
+}
+
+.form-rif-type,
+.form-line .form-phone-code {
+  width: 50px;
+  padding: 0 5px;
+}
+
+.form-line ::placeholder {
+  color: var(--border);
+  opacity: 0.5;
+}

@@ -34,7 +34,10 @@ body {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"],
+select,
+textarea {
   width: 100%;
   line-height: 45px;
   padding: 0 15px;
@@ -42,6 +45,11 @@ input[type="password"] {
   border-radius: 3px;
   background-color: transparent;
   color: white;
+  resize: none;
+}
+
+select, textarea {
+  color: var(--black);
 }
 
 button:not(.vs__clear),
@@ -290,22 +298,4 @@ tfoot tr td:first-child {
 
 .label.default {
   background-color: var(--default);
-}
-
-.form-line {
-  font-size: 12px;
-  color: var(--black);
-  padding: 5px 20px 10px 0;
-  display: flex;
-}
-
-.form-line > label {
-  font-weight: 600;
-  display: block;
-  margin-right: 5px;
-}
-
-.form-flex {
-  display: flex;
-  flex-wrap: wrap;
 }

@@ -26,6 +26,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="icon" href="assets/images/logo-medium.svg" />
     
     <link rel="stylesheet" href="./css/generalStyles.css">
+    <link rel="stylesheet" href="./css/forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"  />
 
@@ -71,8 +72,10 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
     <script src="components/Clients/Clients.js" defer></script>
     <script src="components/Clients/Client/Client.js" defer></script>
+    <script src="components/Clients/NewClient/NewClient.js" defer></script>
     <link rel="stylesheet" href="components/Clients/Clients.css">
     <link rel="stylesheet" href="components/Clients/Client/Client.css">
+    <link rel="stylesheet" href="components/Clients/NewClient/NewClient.css">
 
     <script src="components/Quotes/Quotes.js" defer></script>
     <script src="components/Quotes/Quote/Quote.js" defer></script>

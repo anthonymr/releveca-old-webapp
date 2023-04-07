@@ -13,16 +13,16 @@ Vue.component('v_quote_details', {
               >
               <span slot="title">{{capitalize(quote.name)}}</span>
               <div slot="body">
-                <div class="form-flex">
-                    <div class="form-line">
+                <div class="quote-flex">
+                    <div class="quote-line">
                         <label>ID:</label>
                         <span>1</span>
                     </div>
-                    <div class="form-line">
+                    <div class="quote-line">
                         <label>ID en el sistema:</label>
                         <span>2</span>
                     </div>
-                    <div class="form-line">
+                    <div class="quote-line">
                         <label>Forma de pago:</label>
                         <span>contado</span>
                     </div>
