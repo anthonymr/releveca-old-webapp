@@ -75,6 +75,12 @@ Vue.mixin({
       input.valid = false;
       this.$alerts.push({message, type: 'alert'});
       return input.valid;
+    },
+    clearFormFields(inputs){
+      for(let input of Object.values(inputs)) {
+        input.value = typeof input.value === 'boolean' ? false : '';
+        input.valid = true;
+      }
     }
   }
 })

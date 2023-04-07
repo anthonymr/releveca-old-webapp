@@ -143,40 +143,43 @@ Vue.component('v_new_client', {
   },
 
   methods: {
-    createClient(e) {
+    async createClient(e) {
       e.preventDefault();
       if (!this.validateForm(this.inputs)) return;
 
-      if(this.checkIfRIFExists(this.inputs.rif.value)) return;
+      if(await this.checkIfRIFExists(this.inputs.rif.value)) return;
 
-      this.$alerts.push({ message: `El RIF está nuevecito`, type: 'ok' });
+      this.setNewClient();
     },
 
     setNewClient() {
       const newClient = {
-        rif: this.inputs.rif.value,
+        code: this.inputs.rifType.value + this.inputs.rif.value, 
         bussinessName: this.inputs.bussinessName.value,
         address: this.inputs.address.value,
-        phone: this.inputs.phone.value,
+        phone: `${this.inputs.phoneCode.value}-${this.inputs.phone.value}`,
         notes: this.inputs.notes.value,
         email: this.inputs.email.value,
-        tax: this.inputs.tax.value,
+        tax: this.inputs.tax.value ? 1 : 0,
       }
 
       axios.post(this.$ajax, { request: 'createClient', newClient })
         .then(response => {
-          if (response.data) {
+          if (response.data === 200) {
             this.$alerts.push({ message: `El cliente ${newClient.bussinessName} ha sido creado`, type: 'ok' });
+            this.clearFormFields(this.inputs);
+          } else {
+            this.$alerts.push({ message: `Error inesperado creando el cliente`, type: 'alert' });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           this.$alerts.push({ message: `Error inesperado creando el cliente`, type: 'alert' });
+          console.error(error);
         });      
     },
 
     async checkIfRIFExists(rif) {
       const response = await axios.post(this.$ajax, { request:'checkIfRIFExists', rif })
-
       if (response.data.length) {
         const client = response.data[0].name.trim();
         this.$alerts.push({ message: `El RIF ${rif} ya existe en la base de datos para el cliente ${client}`, type: 'alert' });

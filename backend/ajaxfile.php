@@ -163,4 +163,13 @@ switch ($request) {
         $sql = "SELECT * FROM $corporationName.clients WHERE rif like '%$data->rif%'";
         genericRequest($link, $sql);
         break;
+    case "createClient":
+        $newClient = $data->newClient;
+        $sql = "INSERT INTO $corporationName.clients 
+            (`code`, `type`, `name`, `address1`, `phone`, `inactive`, `notes`, `registration_date`, `address`, `rif`, `taxpayer`, `email`, `owner`, `status`) 
+            VALUES 
+            ('$newClient->code', '01', '$newClient->bussinessName', '$newClient->address', '$newClient->phone', '0', '$newClient->notes', now(), '$newClient->address', '$newClient->code', '$newClient->tax', '$newClient->email', '$user', 'por aprobar');
+        ";
+        echo genericUpdate($link, $sql);
+        break;
 }
