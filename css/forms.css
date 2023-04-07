@@ -14,7 +14,8 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  padding-bottom: 30px;
 }
 
 .form-container h3 {
@@ -24,26 +25,41 @@
   padding-bottom: 11px;
 }
 
-.form-line {
-  display: flex;
-  gap: 10px;
-}
-
 .form-line > div {
-  width: calc(100% - 150px);
   display: flex;
   gap: 10px;
 }
 
 .form-line > label {
-  width: 150px;
   font-weight: 600;
-  line-height: 24px;
+  font-size: 10px;
+  background-color: white;
+  display: block;
+}
+
+.form-line > label.required::after {
+  display: inline-block;
+  content: '*';
+  font-size: 14px;
+  margin-left: 3px;
+  color: var(--error);
 }
 
 .form-line input {
-  line-height: 24px;
+  line-height: 34px;
   color: var(--black);
+}
+
+.form-line textarea {
+  line-height: 14px;
+  height: 68px;
+  padding-top: 5px;
+}
+
+.form-line input[type="checkbox"] {
+  width: 34px;
+  height: 34px;
+  margin: 5px 0;
 }
 
 .form-rif-type,
@@ -56,3 +72,11 @@
   color: var(--border);
   opacity: 0.5;
 }
+
+.form-line > button {
+  width: auto;
+}
+
+.form-line .error {
+  border-color: var(--error);
+} 

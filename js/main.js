@@ -30,6 +30,52 @@ Vue.mixin({
     },
     toFixed(str) {
       return parseFloat(str).toFixed(2);
+    },
+    validateForm(inputs) {
+      let itsAllOk = true;
+      for(let value of Object.values(inputs)) {
+        if(typeof value.value === 'string') {
+          if(value.noWhiteSpaces) value.value = value.value.replace(/\s/g, '');
+          value.value = value.value.toUpperCase().trim().replace(/\s\s+/g, ' ');
+        }
+
+        if(value.notRequired && !value.maxLength) continue;
+
+        if(!value.notRequired && !value.value) {
+          itsAllOk = this.validateFormError(value, `El campo "${value.name}" es obligatorio`);
+          continue;
+        } else {
+          if(value.minLength && value.value.length < value.minLength) {
+            itsAllOk = this.validateFormError(value, `El campo "${value.name}" debe tener al menos ${value.minLength} caracteres`);
+            continue;
+          }
+
+          if(value.maxLength && value.value.length > value.maxLength) {
+            itsAllOk = this.validateFormError(value, `El campo "${value.name}" debe tener menos de ${value.maxLength} caracteres`);
+            continue;
+          }
+
+          if(value.length && value.value.length !== value.length) {
+            itsAllOk = this.validateFormError(value, `El campo "${value.name}" debe tener ${value.length} caracteres`);
+            continue;
+          }
+
+          if(value.regex && !value.regex.test(value.value)) {
+            itsAllOk = this.validateFormError(value, `El campo "${value.name}" no es válido`);
+            continue;
+          }
+
+          value.valid = true;
+        }
+      };
+      
+      return itsAllOk;
+    },
+
+    validateFormError(input, message) {
+      input.valid = false;
+      this.$alerts.push({message, type: 'alert'});
+      return input.valid;
     }
   }
 })
