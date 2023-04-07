@@ -71,7 +71,6 @@ Vue.mixin({
       
       return itsAllOk;
     },
-
     validateFormError(input, message) {
       input.valid = false;
       this.$alerts.push({message, type: 'alert'});
@@ -115,14 +114,12 @@ const VueInstance = new Vue({
           existing[0].count --;
         }
       },
-
       deleteItemFromCartAll(item) {
         const existing = this.globalCart.filter((curItem) => curItem.code === item.code);
 
         if (!existing.length) return;
         existing[0].count = 0;
       },
-
       deleteAllItemsFromCart() {
         this.globalCart.forEach((item) => {
           item.count = 0;
