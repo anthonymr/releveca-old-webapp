@@ -62,7 +62,7 @@ Vue.component('v_new_client', {
             </div>
 
             <div class="form-line">
-              <button @click="storeClient">
+              <button @click="createClient">
                 <i class="fas fa-save"></i>
                 Crear cliente
               </button>
@@ -73,81 +73,116 @@ Vue.component('v_new_client', {
   `,
 
   data() {
-      return {
-        inputs: {
-          rifType: {
-            value: '',
-            valid: true,
-            name: 'Tiopo de RIF',
-          },
-          rif: {
-            value: '',
-            valid: true,
-            name: 'RIF',
-            minLength: 7,
-            maxLength: 13,
-            noWhiteSpaces: true,
-          },
-          bussinessName: {
-            value: '',
-            valid: true,
-            name: 'Razón social',
-            minLength: 10,
-            maxLength: 150,
-          },
-          address: {
-            value: '',
-            valid: true,
-            name: 'Dirección fiscal',
-            minLength: 20,
-            maxLength: 190,
-          },
-          phoneCode: {
-            value: '',
-            valid: true,
-            name: 'Código de área',
-            length: 4,
-            noWhiteSpaces: true,
-          },
-          phone: {
-            value: '',
-            valid: true,
-            name: 'Teléfono',
-            length: 7,
-            noWhiteSpaces: true,
-          },
-          notes: {
-            value: '',
-            valid: true,
-            name: 'Notas',
-            notRequired: true,
-            maxLength: 200,
-          },
-          email: {
-            value: '',
-            valid: true,
-            name: 'Correo',
-            regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            maxLength: 100,
-            noWhiteSpaces: true,
-          },
-          tax: {
-            value: false,
-            valid: true,
-            name: 'Impuesto',
-            notRequired: true,
-          },
+    return {
+      inputs: {
+        rifType: {
+          value: '',
+          valid: true,
+          name: 'Tiopo de RIF',
         },
-        
-      }
+        rif: {
+          value: '',
+          valid: true,
+          name: 'RIF',
+          minLength: 7,
+          maxLength: 13,
+          noWhiteSpaces: true,
+        },
+        bussinessName: {
+          value: '',
+          valid: true,
+          name: 'Razón social',
+          minLength: 10,
+          maxLength: 150,
+        },
+        address: {
+          value: '',
+          valid: true,
+          name: 'Dirección fiscal',
+          minLength: 20,
+          maxLength: 190,
+        },
+        phoneCode: {
+          value: '',
+          valid: true,
+          name: 'Código de área',
+          length: 4,
+          noWhiteSpaces: true,
+        },
+        phone: {
+          value: '',
+          valid: true,
+          name: 'Teléfono',
+          length: 7,
+          noWhiteSpaces: true,
+        },
+        notes: {
+          value: '',
+          valid: true,
+          name: 'Notas',
+          notRequired: true,
+          maxLength: 200,
+        },
+        email: {
+          value: '',
+          valid: true,
+          name: 'Correo',
+          regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+          maxLength: 100,
+          noWhiteSpaces: true,
+        },
+        tax: {
+          value: false,
+          valid: true,
+          name: 'Impuesto',
+          notRequired: true,
+        },
+      },
+
+    }
   },
 
   methods: {
-    storeClient(e) {
+    createClient(e) {
       e.preventDefault();
-      if(this.validateForm(this.inputs)) {
-        this.$alerts.push({message: `Validado`, type: 'ok'});
-      }
+      if (!this.validateForm(this.inputs)) return;
+
+      if(this.checkIfRIFExists(this.inputs.rif.value)) return;
+
+      this.$alerts.push({ message: `El RIF está nuevecito`, type: 'ok' });
     },
+
+    setNewClient() {
+      const newClient = {
+        rif: this.inputs.rif.value,
+        bussinessName: this.inputs.bussinessName.value,
+        address: this.inputs.address.value,
+        phone: this.inputs.phone.value,
+        notes: this.inputs.notes.value,
+        email: this.inputs.email.value,
+        tax: this.inputs.tax.value,
+      }
+
+      axios.post(this.$ajax, { request: 'createClient', newClient })
+        .then(response => {
+          if (response.data) {
+            this.$alerts.push({ message: `El cliente ${newClient.bussinessName} ha sido creado`, type: 'ok' });
+          }
+        })
+        .catch(error => {
+          this.$alerts.push({ message: `Error inesperado creando el cliente`, type: 'alert' });
+        });      
+    },
+
+    async checkIfRIFExists(rif) {
+      const response = await axios.post(this.$ajax, { request:'checkIfRIFExists', rif })
+
+      if (response.data.length) {
+        const client = response.data[0].name.trim();
+        this.$alerts.push({ message: `El RIF ${rif} ya existe en la base de datos para el cliente ${client}`, type: 'alert' });
+        return true;
+      }
+      return false;
+    }
   },
 });

@@ -159,4 +159,8 @@ switch ($request) {
         $sql = "UPDATE `releveca`.`quotes` SET `approved` = '1' WHERE (`id` = '$data->id');";
         genericUpdate($link, $sql);
         break;
+    case "checkIfRIFExists":
+        $sql = "SELECT * FROM $corporationName.clients WHERE rif like '%$data->rif%'";
+        genericRequest($link, $sql);
+        break;
 }
