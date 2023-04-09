@@ -1,0 +1,27 @@
+.new-files-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 30px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.new-file {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--black);
+}
+
+.new-file .file-type {
+  width: 100%;
+  line-height: 34px;
+}
+
+.new-file .file-extension {
+  width: 34px;
+  line-height: 34px;
+  font-size: 25px;
+  color: var(--gray);
+}

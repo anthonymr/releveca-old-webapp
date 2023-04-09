@@ -78,7 +78,7 @@ Vue.component('v_new_client', {
         rifType: {
           value: '',
           valid: true,
-          name: 'Tiopo de RIF',
+          name: 'Tipo de RIF',
         },
         rif: {
           value: '',

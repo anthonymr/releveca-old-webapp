@@ -86,6 +86,34 @@ Vue.mixin({
       if(phone[0] === '0') phone = phone.replace(/^0/g, '');
       phone = phone.replace(/[-\s]/g, '');
       return `https://wa.me/58${phone}`;
+    },
+    toBase64Async(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    },
+    documentTypeTpFAIcon(documentType) {
+      console.log(documentType);
+      switch(documentType) {
+        case 'pdf': return 'fa-solid fa-file-pdf';
+        case 'doc': return 'fa-solid fa-file-word';
+        case 'docx': return 'fa-solid fa-file-word';
+        case 'xls': return 'fa-solid fa-file-excel';
+        case 'xlsx': return 'fa-solid fa-file-excel';
+        case 'ppt': return 'fa-solid fa-file-powerpoint';
+        case 'pptx': return 'fa-solid fa-file-powerpoint';
+        case 'txt': return 'fa-solid fa-file-alt';
+        case 'jpg': return 'fa-solid fa-file-image';
+        case 'jpeg': return 'fa-solid fa-file-image';
+        case 'png': return 'fa-solid fa-file-image';
+        case 'gif': return 'fa-solid fa-file-image';
+        case 'bmp': return 'fa-solid fa-file-image';
+        case 'svg': return 'fa-solid fa-file-image';
+        default: return 'fa-solid fa-file';
+      }
     }
   }
 })

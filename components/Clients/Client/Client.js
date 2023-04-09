@@ -65,7 +65,7 @@ Vue.component('v_client', {
 
           <div class="client__info">
             <span class="card__label">
-                Documentos:
+                
             </span>
           </div>
 
@@ -78,10 +78,7 @@ Vue.component('v_client', {
               <i class="fas fa-file-invoice"></i>
               <span>Notas</span>
             </div>
-            <div>
-              <i class="fa-solid fa-file-arrow-up"></i>
-              <span>Docs.</span>
-            </div>
+            <v_client_files :client="client" />
           </div>
 
         </div>
