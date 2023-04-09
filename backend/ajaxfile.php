@@ -70,7 +70,7 @@ switch ($request) {
         ");
         break;
     case "getClientsForInput":
-        genericRequest($link, "SELECT id, name, code, taxpayer FROM $corporationName.clients WHERE inactive = 0 AND owner = $user ORDER BY name");
+        genericRequest($link, "SELECT id, name, code, taxpayer FROM $corporationName.clients WHERE inactive = 0 AND owner = $user AND status = 'aprobado' ORDER BY name");
         break;
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
