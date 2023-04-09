@@ -215,4 +215,10 @@ switch ($request) {
             )
         ");
         break;
+    case "approveClient":
+        if(checkSubmodulePermissions($link, $user, 12)){
+            $sql = "UPDATE $corporationName.clients SET status = 'aprobado' WHERE id = '$data->id'";
+            genericUpdate($link, $sql);
+        }
+        break;
 }

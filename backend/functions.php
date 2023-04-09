@@ -87,3 +87,22 @@ function getCorporationName($link, $corp) {
     }
     return $response[0]['name'];
 }
+
+function checkSubmodulePermissions($link, $user, $submodule) {
+    $data = mysqli_query($link, "SELECT * from controller.permissions 
+                            WHERE `user_id` = $user 
+                            AND `submodule_id` = $submodule 
+                            AND `level` = 2");
+
+    $response = array();
+
+    while ($row = mysqli_fetch_assoc($data)) {
+        $response[] = $row;
+    }
+
+    if(count($response) > 0) {
+        return true;
+    }
+
+    return false;
+}

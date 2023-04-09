@@ -83,7 +83,7 @@ Vue.component('v_client', {
               <i class="fas fa-file-invoice"></i>
               <span>Pedidos</span>
             </div>
-            <div v-if="this.client.status === 'por aprobar' && admin">
+            <div v-if="this.client.status === 'por aprobar' && admin" @click="approveClient">
               <i class="fa-solid fa-thumbs-up"></i>
               <span>Aprov.</span>
             </div>
@@ -105,7 +105,21 @@ Vue.component('v_client', {
   },
 
   methods: {
-    error(e) {
+    approveClient() {
+      if(!confirm(`¿Está seguro de aprobar el cliente ${this.client.name} ?`)) return;
+      
+      axios.post(this.$ajax, { request: 'approveClient', id: this.client.id })
+      .then(() => {
+        this.$alerts.push({ type: 'ok', message: 'Cliente aprobado' });
+        this.$emit('refresh');
+      })
+      .catch(error => {
+        this.$alerts.push({ type: 'alert', message: 'Error cleando el cliente' });
+        console.error(error);
+      })
+    }, 
+
+    error() {
       this.imageError = true;
     }
   },
