@@ -14,6 +14,7 @@ Vue.component('v_client_files', {
               >
               <span slot="title">{{client.name.toLowerCase()}}</span>
               <div slot="body">
+                  <v_client_files_list :client="client" />
                   <v_client_files_form :client="client" />
               </div>
               <template slot="buttons">

@@ -3,7 +3,7 @@ Vue.component('v_client_files_form', {
 
   template: `
       <div class="form-container">
-          <form @submit.prevent="submit">
+          <form>
             <div class="form-line">
               <label for="fileType">File Type</label>
               <div>
@@ -33,6 +33,10 @@ Vue.component('v_client_files_form', {
                 </button>
               </div>
             </div>
+
+            <div class="form-line" v-if="newFiles.length">
+              <button class="btn btn-primary" @click="storeFiles">Guardar</button>
+            </div>
           </form>
 
 
@@ -59,10 +63,23 @@ Vue.component('v_client_files_form', {
     fileChange(e) {
       this.files = Array.from(e.target.files);
     },
-    submit() {
-      console.log(this.fileType);
+    storeFiles(e) {
+      e.preventDefault();
+      axios.post(this.$ajax, {
+        request: 'storeFile',
+        id: this.client.id,
+        files: this.newFiles
+      }).then(response => {
+        console.log(response.data);
+          this.$alerts.push({ message: "Archivos guardados correctamente.", type: 'ok' });
+      }).catch(error => {
+        this.$alerts.push({ message: "Error inesperado guardando los archivos.", type: 'alert' });
+        console.error(error);
+      });
     },
-    async addNewFile() {
+    async addNewFile(e) {
+      e.preventDefault();
+
       if(!this.fileType) {
         this.$alerts.push({ message: `Seleccion un tipo de archivo`, type: 'alert' });
         return;
@@ -84,7 +101,7 @@ Vue.component('v_client_files_form', {
       });
 
       this.fileType = '';
-      this.file = [];
+      this.files = [];
     },
     deleteFile(index) {
       this.newFiles.splice(index, 1);

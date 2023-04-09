@@ -75,7 +75,7 @@ switch ($request) {
     case "storePicture":
         $newImage = '../assets/images/items/'.$data->name;
         echo $newImage;
-        storePicture($newImage , $data->pic);
+        storeFile($newImage , $data->pic);
         if ($data->firstPicture){
             genericUpdate($link, "UPDATE $corporationName.items SET `images` = '$data->name' WHERE (`id` = '$data->id');");
         } else {
@@ -171,5 +171,23 @@ switch ($request) {
             ('$newClient->code', '01', '$newClient->bussinessName', '$newClient->address', '$newClient->phone', '0', '$newClient->notes', now(), '$newClient->address', '$newClient->code', '$newClient->tax', '$newClient->email', '$user', 'por aprobar');
         ";
         echo genericUpdate($link, $sql);
+        break;
+    case "storeFile": 
+        $url = '../assets/files/clients/';
+
+        $files = $data->files;
+
+        foreach($files as $i){
+            $sql = "INSERT INTO $corporationName.client_files (`client_id`, `type`, `extension`) VALUES ('$data->id', '$i->fileType', '$i->fileExtension');";
+
+            if (mysqli_query($link, $sql)) {
+                $id = mysqli_insert_id($link);
+                $newFile = $url.$id.'.'.$i->fileExtension;
+                storeFile($newFile, $i->file);
+            }
+        }
+
+        echo 200;
+
         break;
 }

@@ -66,7 +66,7 @@ function genericUpdate($link, $query)
     }
 }
 
-function storePicture($url, $data){
+function storeFile($url, $data){
     list($type, $data) = explode(';', $data);
     list(, $data)      = explode(',', $data);
     $data = base64_decode($data);

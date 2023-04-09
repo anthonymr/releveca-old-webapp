@@ -75,11 +75,13 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/Clients/NewClient/NewClient.js" defer></script>
     <script src="components/Clients/ClientFiles/ClientFiles.js" defer></script>
     <script src="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.js" defer></script>
+    <script src="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.js" defer></script>
     <link rel="stylesheet" href="components/Clients/Clients.css">
     <link rel="stylesheet" href="components/Clients/Client/Client.css">
     <link rel="stylesheet" href="components/Clients/NewClient/NewClient.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFiles.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.css">
+    <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.css">
 
     <script src="components/Quotes/Quotes.js" defer></script>
     <script src="components/Quotes/Quote/Quote.js" defer></script>
