@@ -1,5 +1,5 @@
 Vue.component('v_client', {
-  props: ['client', 'large'],
+  props: ['client', 'large', 'admin'],
   template: `
       <article class="card">
         <div class="card__main_container">
@@ -39,6 +39,10 @@ Vue.component('v_client', {
                 <span class="label" :class="label">
                     {{client.status}}
                 </span>
+
+                <span class="label info" v-if="admin && client.owner_name">
+                    {{client.owner_name}}
+                </span>
               </div>
             </div>
           </div>
@@ -74,11 +78,19 @@ Vue.component('v_client', {
               <i class="fas fa-edit"></i>
               <span>editar</span>
             </div>
-            <div>
-              <i class="fas fa-file-invoice"></i>
-              <span>Notas</span>
-            </div>
             <v_client_files :client="client" />
+            <div v-if="this.client.status === 'aprobado'">
+              <i class="fas fa-file-invoice"></i>
+              <span>Pedidos</span>
+            </div>
+            <div v-if="this.client.status === 'por aprobar' && admin">
+              <i class="fa-solid fa-thumbs-up"></i>
+              <span>Aprov.</span>
+            </div>
+            <div v-if="admin">
+              <i class="fa-solid fa-user-tag"></i>
+              <span>Reasig.</span>
+            </div>
           </div>
 
         </div>
@@ -108,7 +120,7 @@ Vue.component('v_client', {
       return this.capitalize(this.client.name);
     },
     label() {
-      return this.client.status === 'Activo' ? 'ok' : 'default';
+      return this.client.status === 'aprobado' ? 'ok' : 'default';
     }
   }
 });

@@ -193,4 +193,26 @@ switch ($request) {
         $sql = "SELECT * FROM $corporationName.client_files WHERE client_id = '$data->id'";
         genericRequest($link, $sql);
         break;
+    case "getAllClients":
+        $from = $data->from;
+        $display = $data->display;
+        $filter = $data->filter;
+        genericRequest($link, "SELECT clients.*, users.username as owner_name FROM $corporationName.clients 
+            LEFT JOIN controller.users ON users.id = clients.owner
+            WHERE inactive = 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+            )
+            ORDER BY status DESC, id LIMIT $from, $display");
+        break;
+    case "getAllClientsCount":
+        $filter = $data->filter;
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.clients WHERE inactive = 0 
+            AND ( 
+                name like '%$filter%'
+                OR code like '%$filter%'
+            )
+        ");
+        break;
 }

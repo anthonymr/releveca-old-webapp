@@ -1,4 +1,5 @@
 Vue.component('v_clients', {
+    props: ['all'],
   template: `
       <section class="list" id="start">
           <div class="list-display">
@@ -15,13 +16,14 @@ Vue.component('v_clients', {
                   <i class="fa-solid fa-table-cells-large"></i>
               </span>
           </div>
-          <v_pagination @change="getClients" request="getClientsCount" :filter="paginationFilter">
+          <v_pagination @change="getClients" :request="paginationCount" :filter="paginationFilter">
               <div slot="list" class="list__container">
                   <v_client 
                       @refresh="getClients(0, 10)" 
                       v-for="client in clients" :client="client" 
                       :large="largeIcons" 
                       :key="client.id" 
+                      :admin="all"
                   >
                   </v_client>
 
@@ -52,7 +54,9 @@ Vue.component('v_clients', {
           this.paginationFilter = this.filter;
       },
       getClients(from, display, filter='') {
-          axios.post(this.$ajax, { request: 'getClients', from, display, filter })
+            console.log(this.all);
+          const request = this.all ? 'getAllClients' : 'getClients';
+          axios.post(this.$ajax, { request, from, display, filter })
               .then((response) => { 
                   this.clients = response.data;
                   this.scrollTo('start');
@@ -60,4 +64,10 @@ Vue.component('v_clients', {
               .catch((error) => console.error(error));
       },
   },
+
+  computed: {
+    paginationCount() {
+        return this.all ? 'getAllClientsCount' : 'getClientsCount';
+    }
+  }
 });

@@ -8,6 +8,10 @@
   padding: 0;
 }
 
+.client__header .card__line .label {
+  margin-right: 5px;
+}
+
 .client__header .card__line .card__title,
 .client__header .card__line .card__label {
   font-size: 12px;
