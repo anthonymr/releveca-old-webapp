@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 30px;
   max-height: 150px;
   overflow-y: auto;
+  padding: 5px 0;
 }
 
 .new-file {

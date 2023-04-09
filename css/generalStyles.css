@@ -33,6 +33,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+h3, h4, h5 {
+  margin: 10px 0;
+  font-weight: normal;
+}
+
+h5 {
+  padding-left: 10px;
+  font-size: 14px;
+  color: var(--light-gray);
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],

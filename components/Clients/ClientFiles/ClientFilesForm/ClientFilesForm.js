@@ -2,10 +2,11 @@ Vue.component('v_client_files_form', {
   props: ['client'],
 
   template: `
-      <div class="form-container">
+      <div>
+          <h4>Agregar documentos:</h4>
           <form>
             <div class="form-line">
-              <label for="fileType">File Type</label>
+              <label for="fileType">Tipo de archivo</label>
               <div>
                 <select id="fileType" class="form-control" v-model="fileType">
                   <option v-for="type in fileTypes" :value="type">
@@ -72,6 +73,8 @@ Vue.component('v_client_files_form', {
       }).then(response => {
         console.log(response.data);
           this.$alerts.push({ message: "Archivos guardados correctamente.", type: 'ok' });
+          this.$emit('files-updated');
+          this.newFiles = [];
       }).catch(error => {
         this.$alerts.push({ message: "Error inesperado guardando los archivos.", type: 'alert' });
         console.error(error);

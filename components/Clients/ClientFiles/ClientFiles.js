@@ -14,8 +14,8 @@ Vue.component('v_client_files', {
               >
               <span slot="title">{{client.name.toLowerCase()}}</span>
               <div slot="body">
-                  <v_client_files_list :client="client" />
-                  <v_client_files_form :client="client" />
+                  <v_client_files_form :client="client" @files-updated="updated++" />
+                  <v_client_files_list :key="updated" :client="client" />
               </div>
               <template slot="buttons">
               </template>
@@ -26,6 +26,7 @@ Vue.component('v_client_files', {
   data() {
     return {
       showModal: false,
+      updated: 0,
     }
   },
 

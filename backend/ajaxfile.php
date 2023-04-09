@@ -188,6 +188,9 @@ switch ($request) {
         }
 
         echo 200;
-
+        break;
+    case "getClientFiles":
+        $sql = "SELECT * FROM $corporationName.client_files WHERE client_id = '$data->id'";
+        genericRequest($link, $sql);
         break;
 }
