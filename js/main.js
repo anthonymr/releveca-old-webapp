@@ -81,6 +81,11 @@ Vue.mixin({
         input.value = typeof input.value === 'boolean' ? false : '';
         input.valid = true;
       }
+    },
+    phoneToWhatsapp(phone) {
+      if(phone[0] === '0') phone = phone.replace(/^0/g, '');
+      phone = phone.replace(/[-\s]/g, '');
+      return `https://wa.me/58${phone}`;
     }
   }
 })

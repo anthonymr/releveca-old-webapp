@@ -29,28 +29,59 @@ Vue.component('v_client', {
                     Teléfono:
                 </span>
                 <span class="card__title">
+                  <a :href="phoneToWhatsapp(client.phone)" target="_blank">
                     {{client.phone}}
+                  </a>                    
+                </span>
+              </div>
+
+              <div class="card__line" v-if="large">
+                <span class="label" :class="label">
+                    {{client.status}}
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="card__line" v-if="client.email.trim() && large">
+          <div class="client__info" v-if="client.email.trim() && large">
             <span class="card__label">
                 Correo:
             </span>
             <span class="card__title">
-                {{client.email}}
+                <a :href="'mailto:' + client.email">
+                  {{client.email.toLowerCase()}}
+                </a>
             </span>
           </div>
           
-          <div class="card__info" v-if="client.address1.trim() && large">
+          <div class="client__info" v-if="client.address1.trim() && large">
             <span class="card__label">
                 Dirección:
             </span>
             <span class="card__title">
-                {{client.address1}}
+                {{capitalize(client.address1)}}
             </span>
+          </div>
+
+          <div class="client__info">
+            <span class="card__label">
+                Documentos:
+            </span>
+          </div>
+
+          <div class="client_menu">
+            <div>
+              <i class="fas fa-edit"></i>
+              <span>editar</span>
+            </div>
+            <div>
+              <i class="fas fa-file-invoice"></i>
+              <span>Notas</span>
+            </div>
+            <div>
+              <i class="fa-solid fa-file-arrow-up"></i>
+              <span>Docs.</span>
+            </div>
           </div>
 
         </div>
@@ -79,5 +110,8 @@ Vue.component('v_client', {
     clientName() {
       return this.capitalize(this.client.name);
     },
+    label() {
+      return this.client.status === 'Activo' ? 'ok' : 'default';
+    }
   }
 });
