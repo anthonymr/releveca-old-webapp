@@ -310,3 +310,11 @@ tfoot tr td:first-child {
 .label.default {
   background-color: var(--default);
 }
+
+.margin-top {
+  margin-top: 10px;
+}
+
+.vs__search {
+  min-height:34px;
+}

@@ -221,4 +221,11 @@ switch ($request) {
             genericUpdate($link, $sql);
         }
         break;
+    case "getUsers":
+        genericRequest($link, "SELECT * FROM controller.users WHERE status = 1");
+        break;
+    case "reassignClient":
+        $sql = "UPDATE $corporationName.clients SET owner = '$data->new_owner' WHERE id = '$data->client_id'";
+        genericUpdate($link, $sql);
+        break;
 }

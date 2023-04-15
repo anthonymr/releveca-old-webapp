@@ -87,10 +87,7 @@ Vue.component('v_client', {
               <i class="fa-solid fa-thumbs-up"></i>
               <span>Aprov.</span>
             </div>
-            <div v-if="admin">
-              <i class="fa-solid fa-user-tag"></i>
-              <span>Reasig.</span>
-            </div>
+            <v_reassign_client :client="client" v-if="admin" @updated="$emit('refresh')" />
           </div>
 
         </div>
@@ -100,7 +97,6 @@ Vue.component('v_client', {
   data() {
     return {
       imageError: false,
-      value: 1,
     }
   },
 
