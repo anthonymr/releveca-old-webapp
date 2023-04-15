@@ -15,7 +15,9 @@ Vue.component('v_client_files_form', {
                 </select>
                 <label class="custom-file-upload" :class="{'file-loaded': files.length}">
                   <input type="file" multiple="multiple" @change="fileChange"/>
-                  <i class="fa-solid fa-file-arrow-up"></i>
+                  <i class="fa-solid fa-file-arrow-up">
+                    <span class="number-badge" v-if="files.length">{{ files.length }}</span>
+                  </i>
                 </label>
                 <button @click="addNewFile" class="icon-button">
                   <i class="fa-solid fa-plus"></i>

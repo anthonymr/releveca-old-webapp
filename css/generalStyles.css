@@ -324,3 +324,14 @@ select:disabled,
 textarea:disabled {
   background-color: var(--secondary);
 }
+
+.number-badge {
+  position: absolute;
+  background-color: var(--primary);
+  color: white;
+  padding: 3px 5px;
+  font-size: 9px;
+  border-radius: 10px;
+  top: -5px;
+  right: -5px;
+}
