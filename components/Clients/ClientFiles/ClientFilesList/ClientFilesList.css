@@ -1,0 +1,26 @@
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 5px;
+}
+
+.file-list .file {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+.file-list .file .file-type {
+  flex: 1;
+  font-size: 12px;
+}
+
+.url-button {
+  background-color: white;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+  font-size: 16px;
+  color: var(--primary);
+}

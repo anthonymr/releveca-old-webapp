@@ -26,6 +26,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="icon" href="assets/images/logo-medium.svg" />
     
     <link rel="stylesheet" href="./css/generalStyles.css">
+    <link rel="stylesheet" href="./css/forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"  />
 
@@ -35,6 +36,9 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
 
     <script src="js/vendors/axios.js" defer></script>
     <script src="js/vendors/vue.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue-select@3.20.2/dist/vue-select.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-select@3.20.2/dist/vue-select.min.css" rel="stylesheet">
 
     <script src="components/global/AlertList/Alert/Alert.js" defer></script>
     <link rel="stylesheet" href="components/global/AlertList/Alert/Alert.css">
@@ -56,16 +60,42 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/HeaderLocation/HeaderLocation.js" defer></script>
     <link rel="stylesheet" href="components/HeaderLocation/HeaderLocation.css">
 
-    <script src="components/Items/Items.js" defer></script>
-    <link rel="stylesheet" href="components/Items/Items.css">
-
-    <script src="components/Items/Item/Item.js" defer></script>
-    <link rel="stylesheet" href="components/Items/Item/Item.css">
-    <script src="components/Items/EditItem/EditItem.js" defer></script>
-    <link rel="stylesheet" href="components/Items/EditItem/EditItem.css">
-
     <script src="components/Cart/Cart.js" defer></script>
     <link rel="stylesheet" href="components/Cart/Cart.css">
+
+    <script src="components/Items/Items.js" defer></script>
+    <script src="components/Items/Item/Item.js" defer></script>
+    <script src="components/Items/EditItem/EditItem.js" defer></script>
+    <link rel="stylesheet" href="components/Items/Items.css">
+    <link rel="stylesheet" href="components/Items/Item/Item.css">
+    <link rel="stylesheet" href="components/Items/EditItem/EditItem.css">
+
+    <script src="components/Clients/Clients.js" defer></script>
+    <script src="components/Clients/Client/Client.js" defer></script>
+    <script src="components/Clients/NewClient/NewClient.js" defer></script>
+    <script src="components/Clients/ReassignClient/ReassignClient.js" defer></script>
+    <script src="components/Clients/EditClient/EditClient.js" defer></script>
+    <script src="components/Clients/ClientFiles/ClientFiles.js" defer></script>
+    <script src="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.js" defer></script>
+    <script src="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.js" defer></script>
+    <link rel="stylesheet" href="components/Clients/Clients.css">
+    <link rel="stylesheet" href="components/Clients/Client/Client.css">
+    <link rel="stylesheet" href="components/Clients/NewClient/NewClient.css">
+    <link rel="stylesheet" href="components/Clients/ReassignClient/ReassignClient.css">
+    <link rel="stylesheet" href="components/Clients/EditClient/EditClient.css">
+    <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFiles.css">
+    <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.css">
+    <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.css">
+
+    <script src="components/Quotes/Quotes.js" defer></script>
+    <script src="components/Quotes/Quote/Quote.js" defer></script>
+    <script src="components/Quotes/QuoteDetails/QuoteDetails.js" defer></script>
+    <script src="components/Quotes/QuotesApproval/QuotesApproval.js" defer></script>
+    <link rel="stylesheet" href="components/Quotes/Quotes.css">
+    <link rel="stylesheet" href="components/Quotes/Quote/Quote.css">
+    <link rel="stylesheet" href="components/Quotes/QuoteDetails/QuoteDetails.css">
+    <link rel="stylesheet" href="components/Quotes/QuotesApproval/QuotesApproval.css">
+    
 
     <script src="js/main.js" defer></script>
 </head>

@@ -1,0 +1,60 @@
+.card.quote {
+  max-width: 1200px;
+}
+
+.quote__container {
+  font-size: 12px;
+  padding: 10px 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.quote__container > div {
+  display: flex;
+  align-items: center;
+}
+
+.quote__id {
+  width: 30px;
+  color: var(--primary);
+}
+
+.quote__description {
+  width: calc(100% - 230px);
+  overflow: hidden;
+}
+
+.quote__price {
+  width: 100px;
+  text-align: right;
+  color: var(--primary);
+}
+
+.quote__status {
+  width: 70px;
+  justify-content: flex-end;
+}
+
+.quote__button {
+  width: 30px;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.quote-line {
+  font-size: 12px;
+  color: var(--black);
+  padding: 5px 20px 10px 0;
+  display: flex;
+}
+
+.quote-line > label {
+  font-weight: 600;
+  display: block;
+  margin-right: 5px;
+}
+
+.quote-flex {
+  display: flex;
+  flex-wrap: wrap;
+}

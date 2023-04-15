@@ -54,6 +54,7 @@ p {
     padding: 30px;
     margin: 0 40px;
     border-radius: 5px;
+    max-width: 500px;
 }
 
 .form-wrapper>p {

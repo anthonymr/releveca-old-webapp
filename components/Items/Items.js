@@ -1,7 +1,7 @@
 Vue.component('v_items', {
     template: `
-        <section class="items" id="start">
-            <div class="items-display">
+        <section class="list">
+            <div class="list-display">
                 <input 
                     type="search" 
                     placeholder="buscar" 
@@ -16,7 +16,7 @@ Vue.component('v_items', {
                 </span>
             </div>
             <v_pagination @change="getItems" request="getItemsCount" :filter="paginationFilter">
-                <div slot="list" class="items__container">
+                <div slot="list" class="list__container">
                     <v_item 
                         @refresh="getItems(0, 10)" 
                         v-for="item in items" :item="item" 

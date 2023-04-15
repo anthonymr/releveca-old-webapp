@@ -91,13 +91,6 @@
     background-color: #34c240;
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .3s;
-}
-.fade-enter, .fade-leave-to {
-opacity: 0;
-}
-
 .ok-font {
     color: #34c24090;
 }
