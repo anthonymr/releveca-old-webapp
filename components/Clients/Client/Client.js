@@ -74,10 +74,7 @@ Vue.component('v_client', {
           </div>
 
           <div class="client_menu">
-            <div>
-              <i class="fas fa-edit"></i>
-              <span>editar</span>
-            </div>
+            <v_edit_client :client="client" @updated="$emit('refresh')" />
             <v_client_files :client="client" />
             <div v-if="this.client.status === 'aprobado'">
               <i class="fas fa-file-invoice"></i>

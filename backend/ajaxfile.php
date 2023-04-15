@@ -228,4 +228,23 @@ switch ($request) {
         $sql = "UPDATE $corporationName.clients SET owner = '$data->new_owner' WHERE id = '$data->client_id'";
         genericUpdate($link, $sql);
         break;
+    case "checkIfRIFExistsInOthers":
+        $sql = "SELECT * FROM $corporationName.clients WHERE rif like '%$data->rif%' AND id != '$data->client_id'";
+        genericRequest($link, $sql);
+        break;
+    case "updateClient":
+        $newClientData = $data->newClientData;
+        $sql = "UPDATE $corporationName.clients SET 
+            code = '$newClientData->code',
+            name = '$newClientData->bussinessName',
+            address1 = '$newClientData->address',
+            phone = '$newClientData->phone',
+            notes = '$newClientData->notes',
+            address = '$newClientData->address',
+            rif = '$newClientData->code',
+            taxpayer = '$newClientData->tax',
+            email = '$newClientData->email'
+            WHERE id = '$data->client_id'";
+        genericUpdate($link, $sql);
+    break;
 }

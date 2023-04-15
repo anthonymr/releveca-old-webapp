@@ -60,4 +60,6 @@ body.modal-open {
 .modal__footer-buttons {
     display: flex;
     gap: 5px;
+    width: 100%;
+    justify-content: flex-end;
 }

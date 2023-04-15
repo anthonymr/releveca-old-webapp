@@ -318,3 +318,9 @@ tfoot tr td:first-child {
 .vs__search {
   min-height:34px;
 }
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: var(--secondary);
+}

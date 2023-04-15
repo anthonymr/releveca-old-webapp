@@ -74,6 +74,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <script src="components/Clients/Client/Client.js" defer></script>
     <script src="components/Clients/NewClient/NewClient.js" defer></script>
     <script src="components/Clients/ReassignClient/ReassignClient.js" defer></script>
+    <script src="components/Clients/EditClient/EditClient.js" defer></script>
     <script src="components/Clients/ClientFiles/ClientFiles.js" defer></script>
     <script src="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.js" defer></script>
     <script src="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.js" defer></script>
@@ -81,6 +82,7 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="stylesheet" href="components/Clients/Client/Client.css">
     <link rel="stylesheet" href="components/Clients/NewClient/NewClient.css">
     <link rel="stylesheet" href="components/Clients/ReassignClient/ReassignClient.css">
+    <link rel="stylesheet" href="components/Clients/EditClient/EditClient.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFiles.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.css">
