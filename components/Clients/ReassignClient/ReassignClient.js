@@ -64,6 +64,8 @@ Vue.component('v_reassign_client', {
 
       axios.post(this.$ajax, { request: 'reassignClient', client_id: this.client.id, new_owner: this.selectedNewOwner.id })
         .then(() => {
+          this.$alerts.push({ type: 'ok', message: 'Cliente reasignado con éxito' });
+          document.body.classList.remove("modal-open");
           this.showModal = false;
           this.$emit('updated');
         })  
