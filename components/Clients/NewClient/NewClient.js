@@ -80,7 +80,7 @@ Vue.component('v_new_client', {
     this.clearFormFields(this.$root.clientInputs);
   },
 
-  destroyed() {
+  beforeDestroy() {
     this.clearFormFields(this.$root.clientInputs);
   },
 

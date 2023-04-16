@@ -42,8 +42,19 @@ Vue.component('v_reassign_client', {
     this.getUsers();
   },
 
+  beforeDestroy() {
+    this.clearFormFields(this.$root.clientInputs);
+  },
+
   methods: {
     reassignClient() {
+      this.assignClient(this.client);
+
+      if(!this.validateForm(this.$root.clientInputs)){
+        this.$alerts.push({ type: 'alert', message: 'El cliente no cumple con los requisitos mínimos para ser reasignado', important: true });
+        return;
+      }
+
       axios.post(this.$ajax, { request: 'reassignClient', client_id: this.client.id, new_owner: this.selectedNewOwner.id })
         .then(() => {
           this.showModal = false;

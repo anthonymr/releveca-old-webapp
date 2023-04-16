@@ -8,6 +8,7 @@ Vue.component('v_alert_list', {
                     v-if="alert.active || !alert.hasOwnProperty('active')"
                     :message="alert.message"
                     :type="alert.type"
+                    :important="alert?.important"
                     @completed="$set(alert, 'active', false)"
                     ></v_alert>
             </transition-group>

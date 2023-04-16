@@ -97,6 +97,26 @@ Vue.mixin({
         case 'svg': return 'fa-solid fa-file-image';
         default: return 'fa-solid fa-file';
       }
-    }
+    },
+    assignClient(client) {
+      const rifType = client.rif[0].toUpperCase();
+      if (rifType === 'J' || rifType === 'G' || rifType === 'V' || rifType === 'P') {
+        this.$root.clientInputs.rifType.value = rifType;
+        this.$root.clientInputs.rif.value = client.rif.replaceAll('-', '').slice(1);
+      } else {
+        this.$root.clientInputs.rif.value = client.rif.replaceAll('-', '');
+      }
+      this.$root.clientInputs.bussinessName.value = client.name;
+      this.$root.clientInputs.address.value = client.address;
+
+      if (client.phone.split('-')[0].length === 4) {
+        this.$root.clientInputs.phoneCode.value = client.phone.split('-')[0];
+        this.$root.clientInputs.phone.value = client.phone.split('-')[1];
+      }
+
+      this.$root.clientInputs.notes.value = client.notes;
+      this.$root.clientInputs.email.value = client.email;
+      this.$root.clientInputs.tax.value = Number(client.taxpayer);
+    },
   }
 });

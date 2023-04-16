@@ -1,9 +1,9 @@
 Vue.component('v_alert', {
-    props: ['message', 'type'],
+    props: ['message', 'type', 'important'],
 
     template: `
         <section class="alert-card">
-            <div class="alert-card__body">
+            <div class="alert-card__body" :class="{'alert-important': important}">
                 <div class="alert-card__icon" :class="type + '-font'">
                     <i :class="icon"></i>
                 </div>

@@ -94,3 +94,7 @@
 .ok-font {
     color: #34c24090;
 }
+
+.alert-important {
+    background-color: #fffbe4;
+}

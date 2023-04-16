@@ -97,20 +97,31 @@ Vue.component('v_client', {
     }
   },
 
+  beforeDestroy() {
+    this.clearFormFields(this.$root.clientInputs);
+  },
+
   methods: {
     approveClient() {
-      if(!confirm(`¿Está seguro de aprobar el cliente ${this.client.name} ?`)) return;
-      
+      this.assignClient(this.client);
+
+      if(!this.validateForm(this.$root.clientInputs)){
+        this.$alerts.push({ type: 'alert', message: 'El cliente no cumple con los requisitos mínimos para ser aprobado', important: true });
+        return;
+      }
+
+      if (!confirm(`¿Está seguro de aprobar el cliente ${this.client.name} ?`)) return;
+
       axios.post(this.$ajax, { request: 'approveClient', id: this.client.id })
-      .then(() => {
-        this.$alerts.push({ type: 'ok', message: 'Cliente aprobado' });
-        this.$emit('refresh');
-      })
-      .catch(error => {
-        this.$alerts.push({ type: 'alert', message: 'Error cleando el cliente' });
-        console.error(error);
-      })
-    }, 
+        .then(() => {
+          this.$alerts.push({ type: 'ok', message: 'Cliente aprobado' });
+          this.$emit('refresh');
+        })
+        .catch(error => {
+          this.$alerts.push({ type: 'alert', message: 'Error cleando el cliente' });
+          console.error(error);
+        })
+    },
 
     error() {
       this.imageError = true;

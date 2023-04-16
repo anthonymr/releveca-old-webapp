@@ -96,33 +96,13 @@ Vue.component('v_edit_client', {
     this.clearFormFields(this.$root.clientInputs);
   },
 
-  destroyed() {
+  beforeDestroy() {
     this.clearFormFields(this.$root.clientInputs);
   },
 
   watch: {
     showModal: function (val) {
-      if (val === true) {
-        console.log("montado")
-        const rifType = this.client.rif[0].toUpperCase();
-        if (rifType === 'J' || rifType === 'G' || rifType === 'V' || rifType === 'P') {
-          this.$root.clientInputs.rifType.value = rifType;
-          this.$root.clientInputs.rif.value = this.client.rif.replaceAll('-', '').slice(1);
-        } else {
-          this.$root.clientInputs.rif.value = this.client.rif.replaceAll('-', '');
-        }
-        this.$root.clientInputs.bussinessName.value = this.client.name;
-        this.$root.clientInputs.address.value = this.client.address;
-
-        if (this.client.phone.split('-')[0].length === 4) {
-          this.$root.clientInputs.phoneCode.value = this.client.phone.split('-')[0];
-          this.$root.clientInputs.phone.value = this.client.phone.split('-')[1];
-        }
-
-        this.$root.clientInputs.notes.value = this.client.notes;
-        this.$root.clientInputs.email.value = this.client.email;
-        this.$root.clientInputs.tax.value = Number(this.client.taxpayer);
-      }
+      if (val === true) this.assignClient(this.client);
     }
   },
 
