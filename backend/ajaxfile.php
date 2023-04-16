@@ -140,11 +140,12 @@ switch ($request) {
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
+
         genericRequest($link, "SELECT *, quotes.id AS quote_id, quotes.index AS quote_index FROM $corporationName.quotes
             LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
             LEFT JOIN $corporationName.conditions ON conditions.code = quotes.condition
             LEFT JOIN $corporationName.currency ON currency.code = quotes.currency
-            WHERE clients.name like '%$filter%' AND status = 'en espera'
+            WHERE clients.name like '%$filter%' AND quotes.status = 'en espera'
             ORDER BY quotes.creation_date DESC LIMIT $from, $display
         ");
         break;
@@ -152,7 +153,7 @@ switch ($request) {
         $filter = $data->filter;
         genericRequest($link, "SELECT count(*) AS count FROM $corporationName.quotes
             LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
-            WHERE clients.name like '%$filter%' AND status = 'en espera'
+            WHERE clients.name like '%$filter%' AND quotes.status = 'en espera'
         ");
         break;
     case "approveQuote":

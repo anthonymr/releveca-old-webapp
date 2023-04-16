@@ -3,8 +3,6 @@ Vue.component('v_new_client', {
       <section>
         <div class="form-container">
           <form>
-            <h3>Crear nuevo cliente</h3>
-
             <div class="form-line">
               <label class="required">RIF</label>
               <div>

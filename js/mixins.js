@@ -5,6 +5,7 @@ Vue.mixin({
       element.scrollIntoView({ behavior });
     },
     capitalize(str) {
+      if(!str) return '';
       const words = str.trim().split(" ");
       return words.map((word) => { 
           return word[0] + word.substring(1).toLowerCase(); 

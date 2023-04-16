@@ -61,6 +61,7 @@ Vue.component('v_quotes_approval', {
       getQuotes(from, display, filter='') {
           axios.post(this.$ajax, { request: 'getQuotesForApproval', from, display, filter })
               .then((response) => { 
+                    console.log(response.data);
                   this.quotes = response.data;
                   this.scrollTo('start');
               })

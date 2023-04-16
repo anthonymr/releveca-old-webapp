@@ -16,8 +16,6 @@ Vue.component('v_edit_client', {
               <div slot="body">
                 <div class="form-container">
                   <form>
-                    <h3>Crear nuevo cliente</h3>
-
                     <div class="form-line">
                       <label class="required">RIF</label>
                       <div>
