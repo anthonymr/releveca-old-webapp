@@ -97,6 +97,8 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="stylesheet" href="components/Quotes/QuotesApproval/QuotesApproval.css">
     
 
+    <script src="js/global.js" defer></script>
+    <script src="js/mixins.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
