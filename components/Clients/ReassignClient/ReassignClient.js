@@ -47,11 +47,18 @@ Vue.component('v_reassign_client', {
   },
 
   methods: {
-    reassignClient() {
+    async reassignClient() {
       this.assignClient(this.client);
 
       if(!this.validateForm(this.$root.clientInputs)){
         this.$alerts.push({ type: 'alert', message: 'El cliente no cumple con los requisitos mínimos para ser reasignado', important: true });
+        return;
+      }
+
+      const hasSlotForClient = await this.checkUserClientsLimit(this.selectedNewOwner.id);
+
+      if(!hasSlotForClient){
+        this.$alerts.push({ type: 'alert', message: 'El nuevo dueño ha alcanzado el límite de clientes' });
         return;
       }
 

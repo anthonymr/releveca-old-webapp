@@ -5,7 +5,7 @@ Vue.component('v_item', {
             <div class="item__header">
                 <div class="item__icons">
                     <div class="item__icon item__icon-input">
-                        <input type="number" min="1" v-model="value"/>
+                        <input type="number" min="1" :max="stock" v-model="value"/>
                         <i class="fa-solid fa-circle-plus fa-fw" @click="$root.addToCart(item, value)"></i>
                     </div>
                     <div class="item__icon">
@@ -59,12 +59,13 @@ Vue.component('v_item', {
         itemName(){
             return this.capitalize(this.item.name);
         },
+        stock() {
+            return parseFloat(this.item.stock);
+        },
         inStock(){
-            const stock = parseFloat(this.item.stock);
-
-            return stock > 1 ? 
-                `${stock.toFixed(2)} dispoinbles`:
-                `${stock.toFixed(2)} dispoinble`;
+            return this.stock > 1 ? 
+                `${this.stock.toFixed(2)} dispoinbles`:
+                `${this.stock.toFixed(2)} dispoinble`;
         },
         price(){
             return `${parseFloat(this.item.price).toFixed(2)} USD`;

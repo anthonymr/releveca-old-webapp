@@ -202,17 +202,17 @@ switch ($request) {
             LEFT JOIN controller.users ON users.id = clients.owner
             WHERE inactive = 0 
             AND ( 
-                name like '%$filter%'
-                OR code like '%$filter%'
+                clients.name like '%$filter%'
+                OR clients.code like '%$filter%'
             )
-            ORDER BY status DESC, id LIMIT $from, $display");
+            ORDER BY clients.status DESC, clients.id LIMIT $from, $display");
         break;
     case "getAllClientsCount":
         $filter = $data->filter;
         genericRequest($link, "SELECT count(*) AS count FROM $corporationName.clients WHERE inactive = 0 
             AND ( 
-                name like '%$filter%'
-                OR code like '%$filter%'
+                clients.name like '%$filter%'
+                OR clients.code like '%$filter%'
             )
         ");
         break;
@@ -247,5 +247,15 @@ switch ($request) {
             email = '$newClientData->email'
             WHERE id = '$data->client_id'";
         genericUpdate($link, $sql);
+    break;
+    case "checkUserClientsLimit":
+        $userToCheck = $data->user == '' ? $user : $data->user;
+        $sql = "SELECT * FROM controller.users WHERE id = '$userToCheck'";
+        genericRequest($link, $sql);
+    break;
+    case "userClientsCount":
+        $userToCheck = $data->user == '' ? $user : $data->user;
+        $sql = "SELECT count(*) AS count FROM $corporationName.clients WHERE owner = '$userToCheck'";
+        genericRequest($link, $sql);
     break;
 }

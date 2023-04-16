@@ -57,8 +57,8 @@ Vue.component('v_clients', {
           const request = this.all ? 'getAllClients' : 'getClients';
           axios.post(this.$ajax, { request, from, display, filter })
               .then((response) => { 
-                  this.clients = response.data;
-                  this.scrollTo('start');
+                this.clients = response.data;
+                this.scrollTo('start');
               })
               .catch((error) => console.error(error));
       },

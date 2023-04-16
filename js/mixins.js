@@ -117,5 +117,14 @@ Vue.mixin({
       this.$root.clientInputs.email.value = client.email;
       this.$root.clientInputs.tax.value = Number(client.taxpayer);
     },
+    async checkUserClientsLimit(user='') {
+      const clientLimitResponse = await axios.post(this.$ajax, {request: 'checkUserClientsLimit', user});
+      const clientLimit = parseFloat(clientLimitResponse.data[0].client_limit);
+
+      const clientsCountResponse = await axios.post(this.$ajax, {request: 'userClientsCount', user});
+      const clientsCount = parseFloat(clientsCountResponse.data[0].count);
+
+      return clientLimit > clientsCount;
+    }
   }
 });

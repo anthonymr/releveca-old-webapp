@@ -1,5 +1,5 @@
 Vue.component('v_quotes_approval', {
-  template: `
+    template: `
       <section class="list" id="start">
           <div class="list-display">
               <input 
@@ -35,37 +35,36 @@ Vue.component('v_quotes_approval', {
       </section>
   `,
 
-  data() {
-      return {
-          quotes: [],
-          largeIcons: true,
-          filter: '',
-          paginationFilter: '',
-      }
-  },
+    data() {
+        return {
+            quotes: [],
+            largeIcons: true,
+            filter: '',
+            paginationFilter: '',
+        }
+    },
 
-  created() {
-      this.getQuotes(0, 10);
-  },
+    created() {
+        this.getQuotes(0, 10);
+    },
 
-  methods: {
-      approveQuote(quote){
-        axios.post(this.$ajax, { request: 'approveQuote', id: quote.quote_id })
-        .then(() => this.getQuotes(0, 10, this.filter))
-        .catch((error) => console.error(error));
-      },
-      changeFilter(){
-          this.getQuotes(0, 10, this.filter);
-          this.paginationFilter = this.filter;
-      },
-      getQuotes(from, display, filter='') {
-          axios.post(this.$ajax, { request: 'getQuotesForApproval', from, display, filter })
-              .then((response) => { 
-                    console.log(response.data);
-                  this.quotes = response.data;
-                  this.scrollTo('start');
-              })
-              .catch((error) => console.error(error));
-      },
-  },
+    methods: {
+        approveQuote(quote) {
+            axios.post(this.$ajax, { request: 'approveQuote', id: quote.quote_id })
+                .then(() => this.getQuotes(0, 10, this.filter))
+                .catch((error) => console.error(error));
+        },
+        changeFilter() {
+            this.getQuotes(0, 10, this.filter);
+            this.paginationFilter = this.filter;
+        },
+        getQuotes(from, display, filter = '') {
+            axios.post(this.$ajax, { request: 'getQuotesForApproval', from, display, filter })
+                .then((response) => {
+                    this.quotes = response.data;
+                    this.scrollTo('start');
+                })
+                .catch((error) => console.error(error));
+        },
+    },
 });

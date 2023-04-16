@@ -79,7 +79,17 @@ const VueInstance = new Vue({
       addToCart(item, count) {
         const existing = this.globalCart.filter((curItem) => curItem.code === item.code);
 
+        if(parseInt(count) > parseInt(item.stock)) {
+          this.$alerts.push({message: 'No se puede agregar más de lo que hay en stock.', type: 'alert'});
+          return;
+        }
+
         if(existing.length) {
+          if(existing[0].count + parseInt(count) > parseInt(item.stock)) {
+            this.$alerts.push({message: 'No se puede agregar más de lo que hay en stock.', type: 'alert'});
+            return;
+          }
+
           existing[0].count += parseInt(count);
           return;
         }

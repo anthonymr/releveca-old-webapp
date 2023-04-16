@@ -87,6 +87,13 @@ Vue.component('v_new_client', {
       e.preventDefault();
       if (!this.validateForm(this.$root.clientInputs)) return;
 
+      const hasSlotForClient = await this.checkUserClientsLimit();
+
+      if(!hasSlotForClient){
+        this.$alerts.push({ type: 'alert', message: 'Ha alcanzado el límite de clientes permitidos' });
+        return;
+      }
+
       if(await this.checkIfRIFExists(this.$root.clientInputs.rif.value)) return;
 
       this.setNewClient();

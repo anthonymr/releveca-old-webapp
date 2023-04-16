@@ -6,6 +6,7 @@ require_once "./backend/functions.php";
 // Define variables and initialize with empty values
 $username = $mail = $password = $confirm_password = "";
 $username_err = $mail_err = $password_err = $confirm_password_err = "";
+$name_err = $lastname_err = $name = $lastname = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -71,21 +72,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Las contraseñas no concuerdan. ";
         }
     }
+
+    // Validate name
+    if(trim($_POST["name"]) == ""){
+        $name_err = "Ingrese su nombre. ";
+    } else{
+        $name = trim($_POST["name"]);
+    }
+
+    // Validate lastname
+    if(trim($_POST["lastname"]) == ""){
+        $lastname_err = "Ingrese su apellido. ";
+    } else{
+        $lastname = trim($_POST["lastname"]);
+    }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($mail_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($mail_err) && empty($password_err) && empty($confirm_password_err) && empty($name_err) && empty($lastname_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, mail) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, mail, name, lastname) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_mail);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_mail, $param_name, $param_lastname);
             
             // Set parameters
             $param_username = $username;
             $param_mail = $mail;
 			$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_name = $name;
+            $param_lastname = $lastname;
 			//$param_password = $password;
             
             // Attempt to execute the prepared statement
@@ -127,8 +144,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input placeholder="e-mail" type="text" name="mail" value="<?php echo $mail; ?>">
             <input placeholder="Contraseña" type="password" name="password" value="<?php echo $password; ?>">
             <input placeholder="Confirmar contraseña" type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
+            <input placeholder="Nombre" type="text" name="name" value="<?php echo $name; ?>">
+            <input placeholder="Apellido" type="text" name="lastname" value="<?php echo $lastname; ?>">
             
-
 
             <input type="submit" value="Continuar">
             <input type="reset" class="secondary" value="Limpiar">
@@ -140,6 +158,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <?php echo $mail_err; ?>
                 <?php echo $password_err; ?>
                 <?php echo $confirm_password_err; ?>
+                <?php echo $name_err; ?>
+                <?php echo $lastname_err; ?>
             </div>
         </form>
     </main>
