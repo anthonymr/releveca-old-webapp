@@ -72,8 +72,7 @@ Vue.component('v_client_files_form', {
         request: 'storeFile',
         id: this.client.id,
         files: this.newFiles
-      }).then(response => {
-        console.log(response.data);
+      }).then(() => {
           this.$alerts.push({ message: "Archivos guardados correctamente.", type: 'ok' });
           this.$emit('files-updated');
           this.newFiles = [];

@@ -54,7 +54,6 @@ Vue.component('v_clients', {
           this.paginationFilter = this.filter;
       },
       getClients(from, display, filter='') {
-            console.log(this.all);
           const request = this.all ? 'getAllClients' : 'getClients';
           axios.post(this.$ajax, { request, from, display, filter })
               .then((response) => { 

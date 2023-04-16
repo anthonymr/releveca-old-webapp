@@ -161,7 +161,6 @@ template: `
             details
         })
             .then((response) => {
-                console.log(response.data);
                 this.$root.deleteAllItemsFromCart();
                 this.isOpen = false;
                 this.$alerts.push({message: 'Proforma creada correctamente.', type: 'ok'});

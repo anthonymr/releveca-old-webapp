@@ -58,7 +58,6 @@ Vue.component('v_quote', {
       if(this.status === 'pagado') return('ok');
     },
     id() {
-      console.log(this.quote);
       return this.quote.quote_index || this.quote.quote_id;
     }
   }

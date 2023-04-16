@@ -39,7 +39,6 @@ Vue.component('v_client_files_list', {
       axios.post(this.$ajax, { request: 'getClientFiles', id: this.client.id })
       .then(response => {
         this.files = response.data
-        console.log(response.data);
 
         if (this.files.length == 0) {
           this.noFiles = true;

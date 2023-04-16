@@ -47,7 +47,6 @@ Vue.mixin({
             continue;
           }
 
-          console.log(inputs)
           value.valid = true;
         }
       };
@@ -79,7 +78,6 @@ Vue.mixin({
       });
     },
     documentTypeTpFAIcon(documentType) {
-      console.log(documentType);
       switch(documentType) {
         case 'pdf': return 'fa-solid fa-file-pdf';
         case 'doc': return 'fa-solid fa-file-word';
