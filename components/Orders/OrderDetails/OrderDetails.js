@@ -1,12 +1,10 @@
 Vue.component('v_order_details', {
-  props: ['order'],
-  
-  template: `
-      <div class="item__icon">
-          <i 
-              class="fa-solid fa-eye fa-fw"
-              @click="showModal = true"
-              ></i>
+    props: ['order'],
+
+    template: `
+      <div @click.self="showModal = true">
+        <i @click.self="showModal = true" class="fa-solid fa-eye"></i>
+        <span @click.self="showModal = true">Ver</span>
           <v_modal 
               v-if="showModal"
               @close="showModal = false"
@@ -74,22 +72,22 @@ Vue.component('v_order_details', {
       </div>
   `,
 
-  data() {
-      return {
-          showModal: false,
-          details: [],
-      }
-  },
-
-  created() {
-    this.getOrderDetails();
-  },
-
-  methods: {
-    getOrderDetails() {
-        axios.post(this.$ajax, { request: 'getOrderDetails', id: this.order.order_id })
-        .then((response) => this.details = response.data)
-        .catch((e) => console.error(e));
+    data() {
+        return {
+            showModal: false,
+            details: [],
+        }
     },
-  },
+
+    created() {
+        this.getOrderDetails();
+    },
+
+    methods: {
+        getOrderDetails() {
+            axios.post(this.$ajax, { request: 'getOrderDetails', id: this.order.order_id })
+                .then((response) => this.details = response.data)
+                .catch((e) => console.error(e));
+        },
+    },
 });

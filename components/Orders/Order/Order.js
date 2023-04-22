@@ -27,10 +27,11 @@ Vue.component('v_order', {
           </div>
           <div class="flex-container">
             <div class="card__menu">
-              <div>
+              <v_order_details :order="order"></v_order_details>
+              <!--<div>
                 <i class="fa-solid fa-eye"></i>
                 <span>Ver</span>
-              </div>
+              </div>-->
               <div @click="showHistory = !showHistory" :class="{'alert-important': showHistory}">
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Historia</span>
