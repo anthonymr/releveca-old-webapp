@@ -231,6 +231,10 @@ button.secondary a {
   font-size: 9px;
 }
 
+.card__menu > div.big {
+  width: 70px;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;
 }

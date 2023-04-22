@@ -15,7 +15,7 @@ Vue.component('v_order', {
               <span v-if="debt" class="debt">deuda: {{orderDebt}}</span>
             </div>
             <div class="order__status">
-              <span :class="'label ' + statusColor">
+              <span :class="'label ' + statusColor(status, true)">
                 {{status?.status}}
               </span>
             </div>
@@ -31,24 +31,24 @@ Vue.component('v_order', {
           <div class="flex-container">
             <div class="card__menu">
               <div>
-                <i class="fas fa-file-invoice"></i>
+                <i class="fa-solid fa-eye"></i>
                 <span>Ver</span>
               </div>
               <div>
-                <i class="fas fa-file-invoice"></i>
+              <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Historia</span>
               </div>
               <div>
-                <i class="fas fa-file-invoice"></i>
+              <i class="fa-solid fa-money-bill"></i>
                 <span>Pagos</span>
               </div>
-              <div>
-                <i class="fas fa-file-invoice"></i>
-                <span>prev.</span>
+              <div v-if="previousStatus" class="big" @click="toPreviousStatus">
+                <i class="fa-solid fa-backward" :class="statusColor(previousStatus)"></i>
+                <span>{{previousStatus.status}}</span>
               </div>
-              <div>
-                <i class="fas fa-file-invoice"></i>
-                <span>prox.</span>
+              <div v-if="nextStatus" class="big" @click="toNextStatus">
+                <i class="fa-solid fa-forward" :class="statusColor(nextStatus)"></i>
+                <span>{{nextStatus.status}}</span>
               </div>
             </div>
           </div>
@@ -67,14 +67,52 @@ Vue.component('v_order', {
   },
 
   methods: {
+    statusColor(status, background = false) {
+      if(!status && !background) return('default-font');
+      if(!status) return('default');
+      
+      let cssClass = '' 
+
+      if(status?.id === '1') cssClass = 'default';
+      if(status?.id === '2') cssClass = 'warning';
+      if(status?.id === '3') cssClass = 'info';
+      if(status?.id === '4') cssClass = 'ok';
+
+      return background ? cssClass : cssClass + '-font-full';
+    },
+    toNextStatus() {
+      if(confirm('¿Está seguro de cambiar el estado de la orden a ' + this.nextStatus.status + '?'))
+        this.changeOrderStatus(this.nextStatus.id);
+    },
+    toPreviousStatus() {
+      if(confirm('¿Está seguro de cambiar el estado del pedido a ' + this.previousStatus.status + '?'))
+        this.changeOrderStatus(this.previousStatus.id);
+    },
     getOrderStatuses() {
       axios.post(this.$ajax, { request: 'getOrderStatuses' })
         .then(response => this.statuses = response.data)
+        .catch(error => console.error(error));
+    },
+
+    changeOrderStatus(status) {
+      axios.post(this.$ajax, { request: 'changeOrderStatus', id: this.order.order_id, status })
+        .then(() => {
+          this.$alerts.push({message: 'El estado del pedido ha sido cambiado correctamente.', type: 'ok'});
+          this.$emit('refresh');
+        })
         .catch(error => console.error(error));
     }
   },
 
   computed: {
+    nextStatus() {
+      const current = parseInt(this.status?.id);
+      return this.statuses.find(status => status.id == current + 1);
+    },
+    previousStatus() {
+      const current = parseInt(this.status?.id);
+      return this.statuses.find(status => status.id == current - 1);
+    },
     status() {
       return this.statuses.find(status => status.id === this.order.order_status);
     },
@@ -91,12 +129,6 @@ Vue.component('v_order', {
     orderDebt() {
       const debt = this.toLocal(this.order.balance);
       return `${debt} ${this.order.currency}`;
-    },
-    statusColor() {
-      if(this.status === 'sistema') return('warning');
-      if(this.status === 'en espera') return('default');
-      if(this.status === 'por cobrar') return('danger');
-      if(this.status === 'pagado') return('ok');
     },
     id() {
       return this.order.order_index || this.order.order_id;

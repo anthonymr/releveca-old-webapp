@@ -262,4 +262,8 @@ switch ($request) {
     case "getOrderStatuses":
         genericRequest($link, "SELECT * FROM controller.order_status");
     break;
+    case "changeOrderStatus":
+        $sql = "UPDATE $corporationName.orders SET status = '$data->status' WHERE id = '$data->id'";
+        genericUpdate($link, $sql);
+    break;
 }

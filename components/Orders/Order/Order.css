@@ -60,3 +60,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+/*.fa-backward {
+  color: var(--danger);
+}
+
+.fa-forward {
+  color: var(--ok);
+}*/

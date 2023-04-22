@@ -71,12 +71,21 @@
     color: #d6424290
 }
 
+.alert-font-full {
+    color: #d64242
+}
+
+
 .warning {
     background-color: #fa9f47;
 }
 
 .warning-font {
     color: #fa9f4790;
+}
+
+.warning-font-full {
+    color: #fa9f47;
 }
 
 .info {
@@ -87,12 +96,24 @@
     color: #0090e090;
 }
 
+.info-font-full {
+    color: #0090e0;
+}
+
 .ok {
     background-color: #34c240;
 }
 
 .ok-font {
     color: #34c24090;
+}
+
+.ok-font-full {
+    color: #34c240;
+}
+
+.default-font-full {
+    color: var(--gray)
 }
 
 .alert-important {
