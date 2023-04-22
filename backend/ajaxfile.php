@@ -89,8 +89,8 @@ switch ($request) {
     case "getConditions":
         genericRequest($link, "SELECT * FROM $corporationName.conditions");
         break;
-    case "setQuote":
-        $sql = "INSERT INTO $corporationName.quotes 
+    case "setOrder":
+        $sql = "INSERT INTO $corporationName.orders 
             (`client_id`, `sub_total`, `taxes`, `total`, `condition`, `rate`, `currency`) 
             VALUES 
             ('$data->id', '$data->sub_total', '$data->taxes', '$data->total', '$data->condition', '$data->rate', '$data->currency');
@@ -103,61 +103,61 @@ switch ($request) {
             $id = mysqli_insert_id($link);
 
             foreach($details as $i){
-                genericUpdate($link, "INSERT INTO $corporationName.`quotes_details` 
-                    (`quote_id`, `item_id`, `qty`, `unit_price`, `unit`, `total_price`, `currency`, `rate`) 
+                genericUpdate($link, "INSERT INTO $corporationName.`orders_details` 
+                    (`order_id`, `item_id`, `qty`, `unit_price`, `unit`, `total_price`, `currency`, `rate`) 
                     VALUES 
                     ('$id', '$i->item_id', '$i->qty', '$i->unit_price', '$i->unit', '$i->total', '$data->currency', '$data->rate');");
                 echo 200;
             }
         }
         break;
-    case "getQuotes":
+    case "getOrders":
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
-        genericRequest($link, "SELECT *, quotes.id AS quote_id, quotes.index AS quote_index FROM $corporationName.quotes
-            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
-            LEFT JOIN $corporationName.conditions ON conditions.code = quotes.condition
-            LEFT JOIN $corporationName.currency ON currency.code = quotes.currency
+        genericRequest($link, "SELECT *, orders.id AS order_id, orders.index AS order_index FROM $corporationName.orders
+            LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
+            LEFT JOIN $corporationName.conditions ON conditions.code = orders.condition
+            LEFT JOIN $corporationName.currency ON currency.code = orders.currency
             WHERE clients.name like '%$filter%'
-            ORDER BY quotes.creation_date DESC LIMIT $from, $display
+            ORDER BY orders.creation_date DESC LIMIT $from, $display
         ");
         break;
-    case "getQuotesCount":
+    case "getOrdersCount":
         $filter = $data->filter;
-        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.quotes
-            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.orders
+            LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
             WHERE clients.name like '%$filter%'
         ");
         break;
-    case "getQuoteDetails":
-        $sql = "SELECT quotes_details.*, items.name FROM $corporationName.quotes_details 
+    case "getOrderDetails":
+        $sql = "SELECT orders_details.*, items.name FROM $corporationName.orders_details 
         LEFT JOIN $corporationName.items ON items.id = item_id
-        WHERE quote_id = '$data->id'";
+        WHERE order_id = '$data->id'";
         genericRequest($link, $sql);
         break;
-    case "getQuotesForApproval":
+    case "getOrdersForApproval":
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
 
-        genericRequest($link, "SELECT *, quotes.id AS quote_id, quotes.index AS quote_index FROM $corporationName.quotes
-            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
-            LEFT JOIN $corporationName.conditions ON conditions.code = quotes.condition
-            LEFT JOIN $corporationName.currency ON currency.code = quotes.currency
-            WHERE clients.name like '%$filter%' AND quotes.status = 'en espera'
-            ORDER BY quotes.creation_date DESC LIMIT $from, $display
+        genericRequest($link, "SELECT *, orders.id AS order_id, orders.index AS order_index FROM $corporationName.orders
+            LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
+            LEFT JOIN $corporationName.conditions ON conditions.code = orders.condition
+            LEFT JOIN $corporationName.currency ON currency.code = orders.currency
+            WHERE clients.name like '%$filter%' AND orders.status = 'en espera'
+            ORDER BY orders.creation_date DESC LIMIT $from, $display
         ");
         break;
-    case "getQuotesForApprovalCount":
+    case "getOrdersForApprovalCount":
         $filter = $data->filter;
-        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.quotes
-            LEFT JOIN $corporationName.clients ON clients.id = quotes.client_id
-            WHERE clients.name like '%$filter%' AND quotes.status = 'en espera'
+        genericRequest($link, "SELECT count(*) AS count FROM $corporationName.orders
+            LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
+            WHERE clients.name like '%$filter%' AND orders.status = 'en espera'
         ");
         break;
-    case "approveQuote":
-        $sql = "UPDATE `releveca`.`quotes` SET `approved` = '1' WHERE (`id` = '$data->id');";
+    case "approveOrder":
+        $sql = "UPDATE `releveca`.`orders` SET `approved` = '1' WHERE (`id` = '$data->id');";
         genericUpdate($link, $sql);
         break;
     case "checkIfRIFExists":

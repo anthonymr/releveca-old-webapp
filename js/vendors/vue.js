@@ -5591,7 +5591,7 @@
     'button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,' +
     'output,progress,select,textarea,' +
     'details,dialog,menu,menuitem,summary,' +
-    'content,element,shadow,template,blockquote,iframe,tfoot'
+    'content,element,shadow,template,blockorder,iframe,tfoot'
   );
 
   // this map is intentionally selective, only covering SVG elements that may
@@ -7282,10 +7282,10 @@
   }
 
   function parseString (chr) {
-    var stringQuote = chr;
+    var stringOrder = chr;
     while (!eof()) {
       chr = next();
-      if (chr === stringQuote) {
+      if (chr === stringOrder) {
         break
       }
     }
@@ -9228,7 +9228,7 @@
   // HTML5 tags https://html.spec.whatwg.org/multipage/indices.html#elements-3
   // Phrasing Content https://html.spec.whatwg.org/multipage/dom.html#phrasing-content
   var isNonPhrasingTag = makeMap(
-    'address,article,aside,base,blockquote,body,caption,col,colgroup,dd,' +
+    'address,article,aside,base,blockorder,body,caption,col,colgroup,dd,' +
     'details,dialog,div,dl,dt,fieldset,figcaption,figure,footer,form,' +
     'h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,legend,li,menuitem,meta,' +
     'optgroup,option,param,rp,rt,source,style,summary,tbody,td,tfoot,th,thead,' +
@@ -9747,7 +9747,7 @@
             if (invalidAttributeRE.test(attr.name)) {
               warn$2(
                 "Invalid dynamic argument expression: attribute names cannot contain " +
-                "spaces, quotes, <, >, / or =.",
+                "spaces, orders, <, >, / or =.",
                 {
                   start: attr.start + attr.name.indexOf("["),
                   end: attr.start + attr.name.length

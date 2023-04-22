@@ -87,14 +87,14 @@ if (!isset($_SESSION["corporation"]) || $_SESSION["corporation"] === false) {
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesForm/ClientFilesForm.css">
     <link rel="stylesheet" href="components/Clients/ClientFiles/ClientFilesList/ClientFilesList.css">
 
-    <script src="components/Quotes/Quotes.js" defer></script>
-    <script src="components/Quotes/Quote/Quote.js" defer></script>
-    <script src="components/Quotes/QuoteDetails/QuoteDetails.js" defer></script>
-    <script src="components/Quotes/QuotesApproval/QuotesApproval.js" defer></script>
-    <link rel="stylesheet" href="components/Quotes/Quotes.css">
-    <link rel="stylesheet" href="components/Quotes/Quote/Quote.css">
-    <link rel="stylesheet" href="components/Quotes/QuoteDetails/QuoteDetails.css">
-    <link rel="stylesheet" href="components/Quotes/QuotesApproval/QuotesApproval.css">
+    <script src="components/Orders/Orders.js" defer></script>
+    <script src="components/Orders/Order/Order.js" defer></script>
+    <script src="components/Orders/OrderDetails/OrderDetails.js" defer></script>
+    <script src="components/Orders/OrdersApproval/OrdersApproval.js" defer></script>
+    <link rel="stylesheet" href="components/Orders/Orders.css">
+    <link rel="stylesheet" href="components/Orders/Order/Order.css">
+    <link rel="stylesheet" href="components/Orders/OrderDetails/OrderDetails.css">
+    <link rel="stylesheet" href="components/Orders/OrdersApproval/OrdersApproval.css">
     
 
     <script src="js/global.js" defer></script>

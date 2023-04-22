@@ -1,4 +1,4 @@
-Vue.component('v_quotes', {
+Vue.component('v_orders', {
   template: `
       <section class="list" id="start">
           <div class="list-display">
@@ -16,17 +16,17 @@ Vue.component('v_quotes', {
               </span>
           </div>
 
-          <v_pagination @change="getQuotes" request="getQuotesCount" :filter="paginationFilter">
+          <v_pagination @change="getOrders" request="getOrdersCount" :filter="paginationFilter">
               <div slot="list" class="list__container">
-                  <v_quote 
-                      @refresh="getQuotes(0, 10)" 
-                      v-for="quote in quotes" :quote="quote" 
+                  <v_order 
+                      @refresh="getOrders(0, 10)" 
+                      v-for="order in orders" :order="order" 
                       :large="largeIcons" 
-                      :key="quote.quote_id" 
+                      :key="order.order_id" 
                   >
-                  </v_quote>
+                  </v_order>
 
-                  <div v-if="!quotes.length">
+                  <div v-if="!orders.length">
                       No se ha encontrado ninguna proforma.
                   </div>
               </div>
@@ -36,7 +36,7 @@ Vue.component('v_quotes', {
 
   data() {
       return {
-          quotes: [],
+          orders: [],
           largeIcons: true,
           filter: '',
           paginationFilter: '',
@@ -44,18 +44,18 @@ Vue.component('v_quotes', {
   },
 
   created() {
-      this.getQuotes(0, 10);
+      this.getOrders(0, 10);
   },
 
   methods: {
       changeFilter(){
-          this.getQuotes(0, 10, this.filter);
+          this.getOrders(0, 10, this.filter);
           this.paginationFilter = this.filter;
       },
-      getQuotes(from, display, filter='') {
-          axios.post(this.$ajax, { request: 'getQuotes', from, display, filter })
+      getOrders(from, display, filter='') {
+          axios.post(this.$ajax, { request: 'getOrders', from, display, filter })
               .then((response) => { 
-                  this.quotes = response.data;
+                  this.orders = response.data;
                   this.scrollTo('start');
               })
               .catch((error) => console.error(error));

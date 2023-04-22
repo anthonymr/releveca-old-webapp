@@ -1,4 +1,4 @@
-Vue.component('v_quotes_approval', {
+Vue.component('v_orders_approval', {
     template: `
       <section class="list" id="start">
           <div class="list-display">
@@ -16,18 +16,18 @@ Vue.component('v_quotes_approval', {
               </span>
           </div>
 
-          <v_pagination @change="getQuotes" request="getQuotesForApprovalCount" :filter="paginationFilter">
+          <v_pagination @change="getOrders" request="getOrdersForApprovalCount" :filter="paginationFilter">
               <div slot="list" class="list__container">
-                  <v_quote 
-                      @refresh="getQuotes(0, 10)" 
-                      v-for="quote in quotes" :quote="quote" 
+                  <v_order 
+                      @refresh="getOrders(0, 10)" 
+                      v-for="order in orders" :order="order" 
                       :large="largeIcons" 
-                      :key="quote.quote_id"
-                      :approve="approveQuote"
+                      :key="order.order_id"
+                      :approve="approveOrder"
                   >
-                  </v_quote>
+                  </v_order>
 
-                  <div v-if="!quotes.length">
+                  <div v-if="!orders.length">
                       No se ha encontrado ninguna proforma.
                   </div>
               </div>
@@ -37,7 +37,7 @@ Vue.component('v_quotes_approval', {
 
     data() {
         return {
-            quotes: [],
+            orders: [],
             largeIcons: true,
             filter: '',
             paginationFilter: '',
@@ -45,23 +45,23 @@ Vue.component('v_quotes_approval', {
     },
 
     created() {
-        this.getQuotes(0, 10);
+        this.getOrders(0, 10);
     },
 
     methods: {
-        approveQuote(quote) {
-            axios.post(this.$ajax, { request: 'approveQuote', id: quote.quote_id })
-                .then(() => this.getQuotes(0, 10, this.filter))
+        approveOrder(order) {
+            axios.post(this.$ajax, { request: 'approveOrder', id: order.order_id })
+                .then(() => this.getOrders(0, 10, this.filter))
                 .catch((error) => console.error(error));
         },
         changeFilter() {
-            this.getQuotes(0, 10, this.filter);
+            this.getOrders(0, 10, this.filter);
             this.paginationFilter = this.filter;
         },
-        getQuotes(from, display, filter = '') {
-            axios.post(this.$ajax, { request: 'getQuotesForApproval', from, display, filter })
+        getOrders(from, display, filter = '') {
+            axios.post(this.$ajax, { request: 'getOrdersForApproval', from, display, filter })
                 .then((response) => {
-                    this.quotes = response.data;
+                    this.orders = response.data;
                     this.scrollTo('start');
                 })
                 .catch((error) => console.error(error));

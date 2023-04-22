@@ -8,8 +8,8 @@ template: `
 
             <div v-if="activeModule?.submodule?.id == 1"><v_items :key="key"></v_items></div>
             <div v-else-if="activeModule?.submodule?.id == 3"><v_clients :key="key"></v_clients></div>
-            <div v-else-if="activeModule?.submodule?.id == 4"><v_quotes :key="key"></v_quotes></div>
-            <div v-else-if="activeModule?.submodule?.id == 10"><v_quotes_approval :key="key"></v_quotes_approval></div>
+            <div v-else-if="activeModule?.submodule?.id == 4"><v_orders :key="key"></v_orders></div>
+            <div v-else-if="activeModule?.submodule?.id == 10"><v_orders_approval :key="key"></v_orders_approval></div>
             <div v-else-if="activeModule?.submodule?.id == 11"><v_new_client :key="key"></v_new_client></div>
             <div v-else-if="activeModule?.submodule?.id == 12"><v_clients :key="key" :all="true"></v_clients></div>
             <div v-else></div>

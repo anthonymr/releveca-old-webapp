@@ -1,5 +1,5 @@
-Vue.component('v_quote_details', {
-  props: ['quote'],
+Vue.component('v_order_details', {
+  props: ['order'],
   
   template: `
       <div class="item__icon">
@@ -11,23 +11,23 @@ Vue.component('v_quote_details', {
               v-if="showModal"
               @close="showModal = false"
               >
-              <span slot="title">{{capitalize(quote.name)}}</span>
+              <span slot="title">{{capitalize(order.name)}}</span>
               <div slot="body">
-                <div class="quote-flex">
-                    <div class="quote-line">
+                <div class="order-flex">
+                    <div class="order-line">
                         <label>ID:</label>
                         <span>1</span>
                     </div>
-                    <div class="quote-line">
+                    <div class="order-line">
                         <label>ID en el sistema:</label>
                         <span>2</span>
                     </div>
-                    <div class="quote-line">
+                    <div class="order-line">
                         <label>Forma de pago:</label>
                         <span>contado</span>
                     </div>
                 </div>
-                <div class="quote__details">
+                <div class="order__details">
                     <table>
                         <thead>
                             <tr>
@@ -49,19 +49,19 @@ Vue.component('v_quote_details', {
                             <tr>
                                 <td colspan="3">Subtotal:</td>
                                 <td>
-                                    {{toFixed(quote.sub_total)}} {{quote.currency}}
+                                    {{toFixed(order.sub_total)}} {{order.currency}}
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">IVA:</td>
                                 <td>
-                                    {{toFixed(quote.taxes)}} {{quote.currency}}
+                                    {{toFixed(order.taxes)}} {{order.currency}}
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">Total:</td>
                                 <td>
-                                    {{toFixed(quote.total)}} {{quote.currency}}
+                                    {{toFixed(order.total)}} {{order.currency}}
                                 </td>
                             </tr>
                         </tfoot>
@@ -82,12 +82,12 @@ Vue.component('v_quote_details', {
   },
 
   created() {
-    this.getQuoteDetails();
+    this.getOrderDetails();
   },
 
   methods: {
-    getQuoteDetails() {
-        axios.post(this.$ajax, { request: 'getQuoteDetails', id: this.quote.quote_id })
+    getOrderDetails() {
+        axios.post(this.$ajax, { request: 'getOrderDetails', id: this.order.order_id })
         .then((response) => this.details = response.data)
         .catch((e) => console.error(e));
     },

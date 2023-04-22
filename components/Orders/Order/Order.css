@@ -1,60 +1,60 @@
-.card.quote {
+.card.order {
   max-width: 1200px;
 }
 
-.quote__container {
+.order__container {
   font-size: 12px;
   padding: 10px 5px;
   user-select: none;
   cursor: pointer;
 }
 
-.quote__container > div {
+.order__container > div {
   display: flex;
   align-items: center;
 }
 
-.quote__id {
+.order__id {
   width: 30px;
   color: var(--primary);
 }
 
-.quote__description {
+.order__description {
   width: calc(100% - 230px);
   overflow: hidden;
 }
 
-.quote__price {
+.order__price {
   width: 100px;
   text-align: right;
   color: var(--primary);
 }
 
-.quote__status {
+.order__status {
   width: 70px;
   justify-content: flex-end;
 }
 
-.quote__button {
+.order__button {
   width: 30px;
   justify-content: center;
   padding-left: 10px;
 }
 
-.quote-line {
+.order-line {
   font-size: 12px;
   color: var(--black);
   padding: 5px 20px 10px 0;
   display: flex;
 }
 
-.quote-line > label {
+.order-line > label {
   font-weight: 600;
   display: block;
   margin-right: 5px;
 }
 
-.quote-flex {
+.order-flex {
   display: flex;
   flex-wrap: wrap;
 }

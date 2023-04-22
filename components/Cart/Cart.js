@@ -101,7 +101,7 @@ template: `
                 </div>
 
                 <div class="cart__buttons">
-                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="setQuote">Crear proforma</button>
+                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="setOrder">Crear proforma</button>
                     <button v-if="$root.globalCartCount" @click="$root.deleteAllItemsFromCart()" class="secondary">Limpiar carrito</button>
                 </div>
             </section>
@@ -141,7 +141,7 @@ template: `
             })
             .catch((error) => console.error(error));
         },
-        setQuote(){
+        setOrder(){
             const details = this.$root.globalCart.filter((line) => line.count > 0).map((line) => ({
                 item_id: line.id,
                 qty: line.count,
@@ -150,7 +150,7 @@ template: `
                 total: parseFloat(line.count) * parseFloat(line.price) * this.rate,
             }));
 
-            axios.post(this.$ajax, { request: 'setQuote',  
+            axios.post(this.$ajax, { request: 'setOrder',  
             id:this.selectedClient.id, 
             sub_total:this.subTotal, 
             taxes:this.taxes, 
