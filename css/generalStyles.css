@@ -205,6 +205,32 @@ button.secondary a {
   padding: 2px 0;
 }
 
+.card__menu {
+  display: flex;
+  gap: 10px;
+  color: var(--gray);
+  font-size: 18px;
+  margin: 5px 0 15px 0;
+}
+
+.card__menu > div {
+  cursor: pointer;
+  user-select: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__menu > div > span {
+  padding-top: 2px;
+  font-size: 9px;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;
 }

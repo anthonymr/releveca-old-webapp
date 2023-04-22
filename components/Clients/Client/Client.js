@@ -73,7 +73,7 @@ Vue.component('v_client', {
             </span>
           </div>
 
-          <div class="client_menu">
+          <div class="card__menu">
             <v_edit_client :client="client" @updated="$emit('refresh')" />
             <v_client_files :client="client" />
             <div v-if="this.client.status === 'aprobado'">

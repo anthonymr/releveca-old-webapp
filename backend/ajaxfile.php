@@ -120,6 +120,7 @@ switch ($request) {
             LEFT JOIN $corporationName.conditions ON conditions.code = orders.condition
             LEFT JOIN $corporationName.currency ON currency.code = orders.currency
             WHERE clients.name like '%$filter%'
+                AND clients.owner = $user
             ORDER BY orders.creation_date DESC LIMIT $from, $display
         ");
         break;
@@ -257,5 +258,8 @@ switch ($request) {
         $userToCheck = $data->user == '' ? $user : $data->user;
         $sql = "SELECT count(*) AS count FROM $corporationName.clients WHERE owner = '$userToCheck'";
         genericRequest($link, $sql);
+    break;
+    case "getOrderStatuses":
+        genericRequest($link, "SELECT * FROM controller.order_status");
     break;
 }

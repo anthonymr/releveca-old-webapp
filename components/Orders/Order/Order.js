@@ -16,7 +16,7 @@ Vue.component('v_order', {
             </div>
             <div class="order__status">
               <span :class="'label ' + statusColor">
-                {{status}}
+                {{status?.status}}
               </span>
             </div>
             <!--<div class="order__button">
@@ -28,16 +28,56 @@ Vue.component('v_order', {
               </div>
             </div>
           </div>
+          <div class="flex-container">
+            <div class="card__menu">
+              <div>
+                <i class="fas fa-file-invoice"></i>
+                <span>Ver</span>
+              </div>
+              <div>
+                <i class="fas fa-file-invoice"></i>
+                <span>Historia</span>
+              </div>
+              <div>
+                <i class="fas fa-file-invoice"></i>
+                <span>Pagos</span>
+              </div>
+              <div>
+                <i class="fas fa-file-invoice"></i>
+                <span>prev.</span>
+              </div>
+              <div>
+                <i class="fas fa-file-invoice"></i>
+                <span>prox.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
   `,
 
   data() {
     return {
+      statuses: []
+    }
+  },
+
+  created() {
+    this.getOrderStatuses();
+  },
+
+  methods: {
+    getOrderStatuses() {
+      axios.post(this.$ajax, { request: 'getOrderStatuses' })
+        .then(response => this.statuses = response.data)
+        .catch(error => console.error(error));
     }
   },
 
   computed: {
+    status() {
+      return this.statuses.find(status => status.id === this.order.order_status);
+    },
     total() {
       return parseFloat(this.order.total);
     },
@@ -51,9 +91,6 @@ Vue.component('v_order', {
     orderDebt() {
       const debt = this.toLocal(this.order.balance);
       return `${debt} ${this.order.currency}`;
-    },
-    status() {
-      return this.order.order_status;
     },
     statusColor() {
       if(this.status === 'sistema') return('warning');

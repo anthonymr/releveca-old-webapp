@@ -27,29 +27,3 @@
   text-decoration: none;
   color: var(--info);
 }
-
-.client_menu {
-  display: flex;
-  gap: 10px;
-  color: var(--gray);
-  font-size: 18px;
-  margin: 5px 0 15px 0;
-}
-
-.client_menu > div {
-  cursor: pointer;
-  user-select: none;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--secondary);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.client_menu > div > span {
-  padding-top: 2px;
-  font-size: 9px;
-}
