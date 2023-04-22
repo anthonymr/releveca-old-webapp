@@ -263,7 +263,16 @@ switch ($request) {
         genericRequest($link, "SELECT * FROM controller.order_status");
     break;
     case "changeOrderStatus":
-        $sql = "UPDATE $corporationName.orders SET status = '$data->status' WHERE id = '$data->id'";
-        genericUpdate($link, $sql);
+        $queries = [
+            "UPDATE $corporationName.orders SET status = '$data->to' WHERE id = '$data->id'",
+            "INSERT INTO $corporationName.orders_history (`order_id`, `from`, `to`, `by`) VALUES ('$data->id', '$data->from', '$data->to', '$user');"
+        ];
+        genericTransaction($link, $queries);
+    break;
+    case "getOrderHistory":
+        $sql = "SELECT orders_history.*, date(moment) as moment, users.name, users.lastname FROM $corporationName.orders_history
+        LEFT JOIN controller.users on users.id = `by`
+        WHERE order_id = '$data->id'";
+        genericRequest($link, $sql);
     break;
 }

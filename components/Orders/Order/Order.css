@@ -61,10 +61,10 @@
   flex-wrap: wrap;
 }
 
-/*.fa-backward {
+.fa-backward {
   color: var(--danger);
 }
 
 .fa-forward {
   color: var(--ok);
-}*/
+}

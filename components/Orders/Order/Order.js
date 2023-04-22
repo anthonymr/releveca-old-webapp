@@ -19,9 +19,6 @@ Vue.component('v_order', {
                 {{status?.status}}
               </span>
             </div>
-            <!--<div class="order__button">
-              <v_order_details :order="order"></v_order_details>
-            </div>-->
             <div class="order__button" v-if="approve">
               <div class="item__icon" @click="approve(order)" v-if="order.approved === '0'">
                 <i class="fa-solid fa-circle-check"></i>
@@ -34,8 +31,8 @@ Vue.component('v_order', {
                 <i class="fa-solid fa-eye"></i>
                 <span>Ver</span>
               </div>
-              <div>
-              <i class="fa-solid fa-clock-rotate-left"></i>
+              <div @click="showHistory = !showHistory" :class="{'alert-important': showHistory}">
+                <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Historia</span>
               </div>
               <div>
@@ -43,14 +40,37 @@ Vue.component('v_order', {
                 <span>Pagos</span>
               </div>
               <div v-if="previousStatus" class="big" @click="toPreviousStatus">
-                <i class="fa-solid fa-backward" :class="statusColor(previousStatus)"></i>
+                <i class="fa-solid fa-backward"></i>
                 <span>{{previousStatus.status}}</span>
               </div>
               <div v-if="nextStatus" class="big" @click="toNextStatus">
-                <i class="fa-solid fa-forward" :class="statusColor(nextStatus)"></i>
+                <i class="fa-solid fa-forward"></i>
                 <span>{{nextStatus.status}}</span>
               </div>
             </div>
+          </div>
+
+          <!-- HISTORY -->
+
+          <div class="flex-container" v-if="showHistory">
+            <table class="small padded">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th></th>
+                  <th>Nuevo estado</th>
+                  <th>Por</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in history">
+                  <td>{{item.moment}}</td>
+                  <td><i :class="historyDirection(item.from, item.to)"></i></td>
+                  <td>{{getStatusInfo(item.to).status}}</td>
+                  <td>{{item.name}} {{item.lastname}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </article>
@@ -58,15 +78,30 @@ Vue.component('v_order', {
 
   data() {
     return {
-      statuses: []
+      statuses: [],
+      history: [],
+      showHistory: false
     }
   },
 
   created() {
     this.getOrderStatuses();
+    this.getOrderHistory();
   },
 
   methods: {
+    historyDirection(from, to) {
+      if(parseInt(from) > parseInt(to)) return "fa-solid fa-backward";
+      return "fa-solid fa-forward";
+    },
+    getStatusInfo(status) {
+      return this.statuses.find(item => item.id === status);
+    },
+    getOrderHistory() {
+      axios.post(this.$ajax, { request: 'getOrderHistory', id: this.order.order_id })
+        .then(response => this.history = response.data)
+        .catch(error => console.error(error));
+    },
     statusColor(status, background = false) {
       if(!status && !background) return('default-font');
       if(!status) return('default');
@@ -93,12 +128,13 @@ Vue.component('v_order', {
         .then(response => this.statuses = response.data)
         .catch(error => console.error(error));
     },
-
     changeOrderStatus(status) {
-      axios.post(this.$ajax, { request: 'changeOrderStatus', id: this.order.order_id, status })
-        .then(() => {
+      axios.post(this.$ajax, { request: 'changeOrderStatus', id: this.order.order_id, from:this.status.id, to: status })
+        .then((response) => {
+          console.log(response.data);
           this.$alerts.push({message: 'El estado del pedido ha sido cambiado correctamente.', type: 'ok'});
           this.$emit('refresh');
+          this.getOrderHistory();
         })
         .catch(error => console.error(error));
     }

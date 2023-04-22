@@ -66,6 +66,24 @@ function genericUpdate($link, $query)
     }
 }
 
+function genericTransaction($link, $queries){
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+    $link->begin_transaction();
+    $link->autocommit(FALSE);
+
+    try {
+        foreach ($queries as $query) {
+            $link->query($query);
+        }
+    } catch(mysqli_sql_exception $exception) {
+        $link->rollback();
+        throw $exception;
+    }
+
+    $link->commit();
+}
+
 function storeFile($url, $data){
     list($type, $data) = explode(';', $data);
     list(, $data)      = explode(',', $data);

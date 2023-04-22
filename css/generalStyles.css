@@ -313,6 +313,14 @@ tfoot tr td:first-child {
   font-weight: 600;
 }
 
+table.small {
+  font-size: 10px;
+}
+
+table.padded {
+  padding: 10px 0;
+}
+
 .label {
   color: white;
   border-radius: 3px;
