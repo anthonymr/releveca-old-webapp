@@ -267,6 +267,7 @@ table {
   color: var(--black);
   font-size: 12px;
   width: 100%;
+  border-collapse: collapse;
 }
 
 table th {
@@ -318,7 +319,7 @@ table.small {
 }
 
 table.padded {
-  padding: 10px 0;
+  margin: 10px 0;
 }
 
 .label {

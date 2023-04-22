@@ -37,7 +37,7 @@ Vue.component('v_order_details', {
                         </thead>
                         <tbody>
                             <tr v-for="detail in details">
-                            <td class="right">{{detail.qty}}</td>
+                                <td class="right">{{detail.qty}}</td>
                                 <td class="left">{{capitalize(detail.name)}}</td>
                                 <td class="right">{{toFixed(detail.unit_price)}} {{detail.currency}}</td>
                                 <td class="right">{{toFixed(detail.total_price)}} {{detail.currency}}</td>

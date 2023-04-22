@@ -28,10 +28,6 @@ Vue.component('v_order', {
           <div class="flex-container">
             <div class="card__menu">
               <v_order_details :order="order"></v_order_details>
-              <!--<div>
-                <i class="fa-solid fa-eye"></i>
-                <span>Ver</span>
-              </div>-->
               <div @click="showHistory = !showHistory" :class="{'alert-important': showHistory}">
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Historia</span>
@@ -66,8 +62,14 @@ Vue.component('v_order', {
               <tbody>
                 <tr v-for="item in history">
                   <td>{{item.moment}}</td>
-                  <td><i :class="historyDirection(item.from, item.to)"></i></td>
-                  <td>{{getStatusInfo(item.to).status}}</td>
+                  <td class="center">
+                    <i :class="historyDirection(item.from, item.to)"></i>
+                  </td>
+                  <td>
+                    <span :class="'label ' + statusColor(getStatusInfo(item.to), true)">
+                      {{getStatusInfo(item.to).status}}
+                    </span>
+                  </td>
                   <td>{{item.name}} {{item.lastname}}</td>
                 </tr>
               </tbody>
