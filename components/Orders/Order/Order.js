@@ -45,11 +45,11 @@ Vue.component('v_order', {
 
   computed: {
     status() {
-      if(this.order.status === 'en espera' && this.order.approved === '1' && this.approve) {
+      /*if(this.order.status === 'en espera' && this.order.approved === '1' && this.approve) {
         return 'sistema';
-      }
+      }*/
 
-      return this.order.status;
+      return this.order.order_status;
     },
     statusColor() {
       if(this.status === 'sistema') return('warning');

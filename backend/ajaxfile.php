@@ -115,7 +115,7 @@ switch ($request) {
         $from = $data->from;
         $display = $data->display;
         $filter = $data->filter;
-        genericRequest($link, "SELECT *, orders.id AS order_id, orders.index AS order_index FROM $corporationName.orders
+        genericRequest($link, "SELECT *, orders.id AS order_id, orders.index AS order_index, orders.status AS order_status FROM $corporationName.orders
             LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
             LEFT JOIN $corporationName.conditions ON conditions.code = orders.condition
             LEFT JOIN $corporationName.currency ON currency.code = orders.currency
