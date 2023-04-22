@@ -9,10 +9,10 @@
   cursor: pointer;
 }
 
-.order__container > div {
+/*.order__container > div {
   display: flex;
   align-items: center;
-}
+}*/
 
 .order__id {
   width: 30px;
@@ -20,19 +20,26 @@
 }
 
 .order__description {
-  width: calc(100% - 230px);
+  width: calc(100% - 200px);
   overflow: hidden;
 }
 
-.order__price {
+.order__amounts {
   width: 100px;
-  text-align: right;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.order__amounts > .debt {
   color: var(--primary);
 }
 
 .order__status {
   width: 70px;
-  justify-content: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .order__button {

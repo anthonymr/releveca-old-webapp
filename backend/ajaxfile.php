@@ -91,9 +91,9 @@ switch ($request) {
         break;
     case "setOrder":
         $sql = "INSERT INTO $corporationName.orders 
-            (`client_id`, `sub_total`, `taxes`, `total`, `condition`, `rate`, `currency`) 
+            (`client_id`, `sub_total`, `taxes`, `total`, `condition`, `rate`, `currency`, `balance`) 
             VALUES 
-            ('$data->id', '$data->sub_total', '$data->taxes', '$data->total', '$data->condition', '$data->rate', '$data->currency');
+            ('$data->id', '$data->sub_total', '$data->taxes', '$data->total', '$data->condition', '$data->rate', '$data->currency', '$data->total');
         ";
 
         $id = 0;

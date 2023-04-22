@@ -10,17 +10,18 @@ Vue.component('v_order', {
             <div class="order__description">
               {{capitalize(order.name)}}
             </div>
-            <div class="order__price">
-              {{orderTotal(order)}}
+            <div class="order__amounts">
+              <span>total: {{orderTotal}}</span>
+              <span v-if="debt" class="debt">deuda: {{orderDebt}}</span>
             </div>
             <div class="order__status">
               <span :class="'label ' + statusColor">
                 {{status}}
               </span>
             </div>
-            <div class="order__button">
+            <!--<div class="order__button">
               <v_order_details :order="order"></v_order_details>
-            </div>
+            </div>-->
             <div class="order__button" v-if="approve">
               <div class="item__icon" @click="approve(order)" v-if="order.approved === '0'">
                 <i class="fa-solid fa-circle-check"></i>
@@ -36,19 +37,22 @@ Vue.component('v_order', {
     }
   },
 
-  methods: {
-    orderTotal(order) {
-      const total = parseFloat(order.total).toFixed(2)
-      return `${total} ${order.currency}`;
-    }
-  },
-
   computed: {
+    total() {
+      return parseFloat(this.order.total);
+    },
+    debt() {
+      return parseFloat(this.order.balance);
+    },
+    orderTotal() {
+      const total = this.toLocal(this.order.total);
+      return `${total} ${this.order.currency}`;
+    },
+    orderDebt() {
+      const debt = this.toLocal(this.order.balance);
+      return `${debt} ${this.order.currency}`;
+    },
     status() {
-      /*if(this.order.status === 'en espera' && this.order.approved === '1' && this.approve) {
-        return 'sistema';
-      }*/
-
       return this.order.order_status;
     },
     statusColor() {

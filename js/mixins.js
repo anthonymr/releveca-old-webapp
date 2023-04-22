@@ -14,6 +14,14 @@ Vue.mixin({
     toFixed(str) {
       return parseFloat(str).toFixed(2);
     },
+    toLocal(num) {
+      if(typeof num === 'string') num = parseFloat(num);
+
+      return num.toLocaleString('de-DE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    },
     validateForm(inputs) {
       let itsAllOk = true;
       for(let value of Object.values(inputs)) {
