@@ -26,7 +26,7 @@
   flex-direction: column;
 }
 
-.order__amounts > .debt {
+.debt {
   color: var(--primary);
 }
 

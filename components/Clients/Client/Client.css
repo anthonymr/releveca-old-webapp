@@ -27,3 +27,21 @@
   text-decoration: none;
   color: var(--info);
 }
+
+.client__debts {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.client__debts .number {
+  color: var(--primary);
+}
+
+.client__debt {
+  display: flex;
+}
+
+.client__debt > span:first-child {
+  width: 120px;
+}

@@ -73,6 +73,18 @@ Vue.component('v_client', {
             </span>
           </div>
 
+          <div class="client__debts" v-if="activeOrders || totalDebt">
+            <div class="client__debt">
+              <span>Pedidos activos: </span>
+              <span class="number">{{toLocal(activeOrders)}}</span>
+            </div>
+
+            <div class="client__debt">
+              <span>Deuda total: </span>
+              <span class="number">{{toLocal(totalDebt)}}</span>
+            </div>
+          </div>
+
           <div class="card__menu">
             <v_edit_client :client="client" @updated="$emit('refresh')" />
             <v_client_files :client="client" />
@@ -94,7 +106,14 @@ Vue.component('v_client', {
   data() {
     return {
       imageError: false,
+      totalDebt: 0,
+      activeOrders: 0,
     }
+  },
+
+  created() {
+    this.getClientActiveOrders();
+    this.getClientTotalDebt();
   },
 
   beforeDestroy() {
@@ -102,10 +121,20 @@ Vue.component('v_client', {
   },
 
   methods: {
+    getClientActiveOrders() {
+      axios.post(this.$ajax, { request: 'getClientActiveOrders', id: this.client.id })
+        .then(({ data }) => this.activeOrders = parseFloat(data[0].count))
+        .catch(error => console.error(error));
+    },
+    getClientTotalDebt() {
+      axios.post(this.$ajax, { request: 'getClientTotalDebt', id: this.client.id })
+        .then(({ data }) => this.totalDebt = parseFloat(data[0].total))
+        .catch(error => console.error(error));
+    },
     approveClient() {
       this.assignClient(this.client);
 
-      if(!this.validateForm(this.$root.clientInputs)){
+      if (!this.validateForm(this.$root.clientInputs)) {
         this.$alerts.push({ type: 'alert', message: 'El cliente no cumple con los requisitos mínimos para ser aprobado', important: true });
         return;
       }

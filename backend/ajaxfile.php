@@ -275,4 +275,16 @@ switch ($request) {
         WHERE order_id = '$data->id'";
         genericRequest($link, $sql);
     break;
+    case "getClientActiveOrders":
+        $sql = "SELECT count(*) AS count FROM $corporationName.orders
+        WHERE client_id = '$data->id' AND 
+        (
+            orders.status = '4'
+            OR orders.balance > 0
+        )";
+        genericRequest($link, $sql);
+    break;
+    case "getClientTotalDebt":
+        $sql = "SELECT coalesce(sum(balance),0) AS total FROM $corporationName.orders WHERE client_id = '$data->id'";
+        genericRequest($link, $sql);
 }
