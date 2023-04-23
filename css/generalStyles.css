@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :root {
   --black: #131313;
@@ -305,6 +306,10 @@ table td.center {
   text-align: center;
 }
 
+tfoot {
+  border-top: 1px solid var(--border);
+}
+
 tfoot tr td {
   background-color: white;
 }
@@ -373,4 +378,9 @@ textarea:disabled {
   border-radius: 10px;
   top: -5px;
   right: -5px;
+}
+
+ .number {
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: 400;
 }

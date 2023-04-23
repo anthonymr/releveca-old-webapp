@@ -30,35 +30,35 @@ Vue.component('v_order_details', {
                         <thead>
                             <tr>
                                 <th style="width:30px">Cant.</th>
-                                <th style="width:calc(100% - 180px)">Artículo</th>
-                                <th style="width:75px">Unid.</th>
-                                <th style="width:75px">Total</th>
+                                <th style="width:calc(100% - 230px)">Artículo</th>
+                                <th style="width:100px">Unid.</th>
+                                <th style="width:100px">Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="detail in details">
                                 <td class="right">{{detail.qty}}</td>
                                 <td class="left">{{capitalize(detail.name)}}</td>
-                                <td class="right">{{toFixed(detail.unit_price)}} {{detail.currency}}</td>
-                                <td class="right">{{toFixed(detail.total_price)}} {{detail.currency}}</td>
+                                <td class="right number">{{toFixed(detail.unit_price)}} {{detail.currency}}</td>
+                                <td class="right number">{{toFixed(detail.total_price)}} {{detail.currency}}</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3">Subtotal:</td>
-                                <td>
+                                <td class="right number">
                                     {{toFixed(order.sub_total)}} {{order.currency}}
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">IVA:</td>
-                                <td>
+                                <td class="right number">
                                     {{toFixed(order.taxes)}} {{order.currency}}
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">Total:</td>
-                                <td>
+                                <td class="right number">
                                     {{toFixed(order.total)}} {{order.currency}}
                                 </td>
                             </tr>

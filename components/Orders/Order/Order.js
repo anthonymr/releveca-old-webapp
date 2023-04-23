@@ -11,8 +11,8 @@ Vue.component('v_order', {
               {{capitalize(order.name)}}
             </div>
             <div class="order__amounts">
-              <span>total: {{orderTotal}}</span>
-              <span v-if="debt" class="debt">deuda: {{orderDebt}}</span>
+              <span>total: <span class="number">{{orderTotal}}</span></span>
+              <span v-if="debt" class="debt">deuda: <span class="number">{{orderDebt}}</span></span>
             </div>
             <div class="order__status">
               <span :class="'label ' + statusColor(status, true)">

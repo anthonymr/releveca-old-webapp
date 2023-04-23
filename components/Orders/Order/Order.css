@@ -20,7 +20,7 @@
 }
 
 .order__amounts {
-  width: 120px;
+  width: 140px;
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -35,12 +35,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.order__button {
-  width: 30px;
-  justify-content: center;
-  padding-left: 10px;
 }
 
 .order-line {
