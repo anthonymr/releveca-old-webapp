@@ -28,7 +28,7 @@ Vue.component('v_orders_approval', {
                   </v_order>
 
                   <div v-if="!orders.length">
-                      No se ha encontrado ninguna proforma.
+                      No se ha encontrado ninguna pedido.
                   </div>
               </div>
           </v_pagination>

@@ -101,7 +101,7 @@ template: `
                 </div>
 
                 <div class="cart__buttons">
-                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="setOrder">Crear proforma</button>
+                    <button v-if="$root.globalCartCount" :disabled="!selectedClient" @click="setOrder">Crear pedido</button>
                     <button v-if="$root.globalCartCount" @click="$root.deleteAllItemsFromCart()" class="secondary">Limpiar carrito</button>
                 </div>
             </section>
@@ -154,9 +154,9 @@ template: `
             .then((response) => {
                 this.$root.deleteAllItemsFromCart();
                 this.isOpen = false;
-                this.$alerts.push({message: 'Proforma creada correctamente.', type: 'ok'});
+                this.$alerts.push({message: 'Pedido creada correctamente.', type: 'ok'});
             })
-            .catch(() => this.$alerts.push({message: 'Error creando la proforma.', type: 'alert'}));
+            .catch(() => this.$alerts.push({message: 'Error creando la pedido.', type: 'alert'}));
         },
         getConditions() {
             axios.post(this.$ajax, { request: 'getConditions' })
