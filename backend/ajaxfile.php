@@ -128,7 +128,7 @@ switch ($request) {
         $filter = $data->filter;
         genericRequest($link, "SELECT count(*) AS count FROM $corporationName.orders
             LEFT JOIN $corporationName.clients ON clients.id = orders.client_id
-            WHERE clients.name like '%$filter%'
+            WHERE clients.name like '%$filter%' AND clients.owner = $user
         ");
         break;
     case "getOrderDetails":
