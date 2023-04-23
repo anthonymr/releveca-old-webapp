@@ -76,12 +76,12 @@ Vue.component('v_client', {
           <div class="client__debts" v-if="activeOrders || totalDebt">
             <div class="client__debt">
               <span>Pedidos activos: </span>
-              <span class="number">{{toLocal(activeOrders)}}</span>
+              <span class="number">{{toLocal(activeOrders)}} US$</span>
             </div>
 
             <div class="client__debt">
               <span>Deuda total: </span>
-              <span class="number">{{toLocal(totalDebt)}}</span>
+              <span class="number">{{toLocal(totalDebt)}} US$</span>
             </div>
           </div>
 
@@ -108,6 +108,7 @@ Vue.component('v_client', {
       imageError: false,
       totalDebt: 0,
       activeOrders: 0,
+      currencies: [],
     }
   },
 
@@ -128,7 +129,11 @@ Vue.component('v_client', {
     },
     getClientTotalDebt() {
       axios.post(this.$ajax, { request: 'getClientTotalDebt', id: this.client.id })
-        .then(({ data }) => this.totalDebt = parseFloat(data[0].total))
+        .then(({ data }) => {
+          this.totalDebt = data.reduce((acc, debt) => {
+            return acc + (parseFloat(debt.balance) / this.$root.rate(debt.currency, debt.rate));
+          }, 0);
+        })
         .catch(error => console.error(error));
     },
     approveClient() {
@@ -168,6 +173,6 @@ Vue.component('v_client', {
     },
     label() {
       return this.client.status === 'aprobado' ? 'ok' : 'default';
-    }
+    },
   }
 });

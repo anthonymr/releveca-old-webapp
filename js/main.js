@@ -2,10 +2,14 @@ const VueInstance = new Vue({
     el: "#app",
 
     data: {
+        // Global Menu
         currentModule: {},
         currentPage: 1,
+
+        // Global Cart
         globalCart : [],
 
+        // Client form
         clientInputs: {
           rifType: {
             value: '',
@@ -70,12 +74,22 @@ const VueInstance = new Vue({
             notRequired: true,
           },
         },
+        
+        // Currency Rate
+        currencies: [],
+    },
+
+    created() {
+      // Currency Rate
+      this.getCurrencies();
     },
 
     methods: {
+      // Global Menu
       changeModule(module) {
         this.currentModule = module;
       },
+      // Global Cart
       addToCart(item, count) {
         const existing = this.globalCart.filter((curItem) => curItem.code === item.code);
 
@@ -118,12 +132,41 @@ const VueInstance = new Vue({
         this.globalCart.forEach((item) => {
           item.count = 0;
         });
-      }
+      },
+      // Currency Rate
+      getCurrencies() {
+        axios.post(this.$ajax, { request: 'getCurrencies' })
+        .then((response) => {
+            this.currencies = response.data;
+        })
+        .catch((error) => console.error(error));
+      },
+      rate(currencyCode, currencyRate) {
+        let rate = 1;
+  
+        if(currencyCode !== this.baseCurreny.code) {
+            if (currencyCode === this.countryCurrency.code) {
+                rate = parseFloat(this.baseCurreny.rate);
+            } else {
+                rate = parseFloat(currencyRate);
+            }
+        }
+  
+        return rate;
+      },
     },
 
     computed: {
+      // Global Cart
       globalCartCount() {
         return this.globalCart.reduce((acc, cur) => acc + parseInt(cur.count), 0);
+      },
+      // Currency Rate
+      baseCurreny() {
+        return this.currencies.filter((cur) => cur.base === '1')[0];
+      },
+      countryCurrency() {
+          return this.currencies.filter((cur) => parseFloat(cur.rate) === 1)[0];
       }
     }
 });

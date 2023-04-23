@@ -123,7 +123,6 @@ template: `
 
     created(){
         this.getClients();
-        this.getCurrencies();
         this.getConditions();
     },
 
@@ -131,14 +130,6 @@ template: `
         getClients() {
             axios.post(this.$ajax, { request: 'getClientsForInput' })
             .then((response) => this.clients = response.data)
-            .catch((error) => console.error(error));
-        },
-        getCurrencies() {
-            axios.post(this.$ajax, { request: 'getCurrencies' })
-            .then((response) => {
-                this.currencies = response.data;
-                this.selectedCurrency = this.currencies.filter((cur) => cur.default === '1')[0];
-            })
             .catch((error) => console.error(error));
         },
         setOrder(){
@@ -192,17 +183,7 @@ template: `
 
     computed: {
         rate() {
-            let rate = 1;
-
-            if(this.selectedCurrency.code !== this.baseCurreny.code) {
-                if (this.selectedCurrency.code === this.countryCurrency.code) {
-                    rate = parseFloat(this.baseCurreny.rate);
-                } else {
-                    rate = parseFloat(this.selectedCurrency.rate);
-                }
-            }
-
-            return rate;
+            return this.$root.rate(this.selectedCurrency.code, this.selectedCurrency.rate)
         },
         subTotal() {
             return this.$root.globalCart.reduce((acc, cur) => acc + (cur.count * parseFloat(cur.price)) , 0) * this.rate;
@@ -213,11 +194,5 @@ template: `
         total() {
             return this.subTotal + this.taxes;
         },
-        baseCurreny() {
-            return this.currencies.filter((cur) => cur.base === '1')[0];
-        },
-        countryCurrency() {
-            return this.currencies.filter((cur) => parseFloat(cur.rate) === 1)[0];
-        }
     }
 });

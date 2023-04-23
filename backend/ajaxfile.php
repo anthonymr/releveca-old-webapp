@@ -285,6 +285,10 @@ switch ($request) {
         genericRequest($link, $sql);
     break;
     case "getClientTotalDebt":
-        $sql = "SELECT coalesce(sum(balance),0) AS total FROM $corporationName.orders WHERE client_id = '$data->id'";
+        $sql = "SELECT balance, currency, currency.*
+        FROM $corporationName.orders 
+        LEFT JOIN $corporationName.currency
+            ON $corporationName.currency.code = $corporationName.orders.currency
+        WHERE client_id = '$data->id'";
         genericRequest($link, $sql);
 }
