@@ -76,7 +76,7 @@ Vue.component('v_client', {
           <div class="client__debts" v-if="activeOrders || totalDebt">
             <div class="client__debt">
               <span>Pedidos activos: </span>
-              <span class="number">{{toLocal(activeOrders)}} US$</span>
+              <span class="number">{{activeOrders}}</span>
             </div>
 
             <div class="client__debt">
